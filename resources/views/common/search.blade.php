@@ -1,0 +1,1 @@
+<input type="text" wire:model="searchTerm" class="form-control" placeholder="{{ __("Search") }}...">
