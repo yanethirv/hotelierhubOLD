@@ -92,30 +92,40 @@
                                 <label class="form-label">{{ __("Description") }}</label>
                                 <textarea class="form-control" style="height:150px" name="description" placeholder="description">{{ $product->description }}</textarea>
                             </div>
+
+                            
                             <div class="form-group">
                                 <label class="form-label">{{ __("Document") }}</label><br>
-                                <!--<a href="{{ route('product-document-download',$product->document) }}">Download Document</a> -->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
-                                    {{ __("View Document") }}
-                                </button><br><br>
-                                <input type="file" name="document">
+                                @if(is_null($product->document))
+                                    <input type="file" name="document">
+                                   <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
+                                        {{ __("View Document") }}
+                                    </button><br><br>
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-dialog-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">{{ __("View Document Product") }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body text-left">
+                                                    <iframe src="{{ asset($product->document) }}" style="width: 500px; height: 500px"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                @else
+                                    <a class="btn btn-warning" href="{{ asset($product->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Document") }}</a>
+                                    <br><br>
+                                    <input type="file" name="document">
+                                @endif
+                               
+                                
                             </div>
 
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-dialog-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">{{ __("View Document Product") }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body text-left">
-                                            <iframe src="{{ url('upload/'.$product->document) }}" style="width: 500px; height: 500px"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <a href="{{ route('products') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                         </form>

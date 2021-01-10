@@ -21,6 +21,7 @@ class UsersComponent extends Component
         if(strlen($this->searchTerm) > 0)
         {
             $users = User::where('name', 'LIKE', '%' . $this->searchTerm . '%')
+                ->orWhere('surname', 'LIKE', '%' . $this->searchTerm . '%')
                 ->orWhere('email', 'LIKE', '%' . $this->searchTerm . '%')
                 ->orWhere('type', 'LIKE', '%' . $this->searchTerm . '%')
                 ->orWhere('status', 'LIKE', '%' . $this->searchTerm . '%')

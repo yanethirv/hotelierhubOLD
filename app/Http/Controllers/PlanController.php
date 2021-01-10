@@ -39,15 +39,8 @@ class PlanController extends Controller
             'type_id' => 'required',
             'status' => 'required',
             'plan_description' => 'max:250',
-            'document' => 'required|file|max:5000|mimes:pdf'
+            'document' => 'sometimes|file|max:5000|mimes:pdf'
         ]);
-
-        $file = $request->file('document');
-        $ruta = public_path() . '/upload';
-        $fileName = time().'.'.$file->getClientOriginalExtension();
-        $file->move($ruta, $fileName);
-
-        
 
         try {
             DB::beginTransaction();
@@ -62,25 +55,51 @@ class PlanController extends Controller
                 'id' => Str::slug(request('plan_name')),
                 'amount' => request('plan_price') * 100
             ]);
+
+            $newDocumentName = null;
+
             if ($plan) {
+                if($file = $request->file('document')){
+                    $tmp = explode('.', $file->getClientOriginalName());//get client file name
+                    $newDocumentName = round(microtime(true)).'.'.end($tmp);
+                    $file->move(public_path('/documents/subscriptions'), $newDocumentName);
+                    $newDocumentName = '/documents/subscriptions/' . $newDocumentName;
 
-                $valor = $request->get('type_id');
-                $typeName = Type::select('name')
-                                ->where('id', '=', $valor)
-                                ->get();
+                    $valor = $request->get('type_id');
+                    $typeName = Type::select('name')
+                                    ->where('id', '=', $valor)
+                                    ->get();
 
-                \App\Plan::create([
-                    'product' => $plan->product,
-                    'nickname' => request('plan_name'),
-                    'amount' => request('plan_price'),
-                    'description' => request('plan_description'),
-                    'slug' => $plan->id,
-                    'cost' => request('plan_cost'),
-                    'type_id' => request('type_id'),
-                    'type_name' =>  $typeName,
-                    'status' => request('status'),
-                    'document' => $fileName,
-                ]);
+                    \App\Plan::create([
+                        'product' => $plan->product,
+                        'nickname' => request('plan_name'),
+                        'amount' => request('plan_price'),
+                        'description' => request('plan_description'),
+                        'slug' => $plan->id,
+                        'cost' => request('plan_cost'),
+                        'type_id' => request('type_id'),
+                        'type_name' =>  $typeName,
+                        'status' => request('status'),
+                        'document' => $newDocumentName,
+                    ]);
+                }else{
+                    $valor = $request->get('type_id');
+                    $typeName = Type::select('name')
+                                    ->where('id', '=', $valor)
+                                    ->get();
+
+                    \App\Plan::create([
+                        'product' => $plan->product,
+                        'nickname' => request('plan_name'),
+                        'amount' => request('plan_price'),
+                        'description' => request('plan_description'),
+                        'slug' => $plan->id,
+                        'cost' => request('plan_cost'),
+                        'type_id' => request('type_id'),
+                        'type_name' =>  $typeName,
+                        'status' => request('status'),
+                    ]);
+                }
             }
             DB::commit();
 
@@ -118,13 +137,11 @@ class PlanController extends Controller
             'type_id' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'document' => 'file|max:5000|mimes:pdf'
+            'document' => 'sometimes|file|max:5000|mimes:pdf'
         ]);
 
-        $input = $request->all();
- 
         $suscription =  \App\Plan::findOrFail($id);
-        //$suscription->update($input);
+  
         $valor = $request->type_id;
         $typeName = Type::select('name')
                         ->where('id', '=', $valor)
@@ -134,13 +151,19 @@ class PlanController extends Controller
         $suscription->type_name  = $typeName;
         $suscription->status  = $request->status;
         $suscription->description  = $request->description;
-        if($request->file('document')){
-            $file = $request->file('document');
-            $ruta = public_path() . '/upload';
-            $fileName = time().'.'.$file->getClientOriginalExtension();
-            $file->move($ruta, $fileName);
-            $suscription->document  = $fileName;
+        
+        $newDocumentName = null;
+
+        //check if file attached
+        if($file = $request->file('document')){
+            $tmp = explode('.', $file->getClientOriginalName());//get client file name
+            $newDocumentName = round(microtime(true)).'.'.end($tmp);
+            $file->move(public_path('/documents/subscriptions'), $newDocumentName);
+            $newDocumentName = '/documents/subscriptions/' . $newDocumentName;
+
+            $suscription->document  = $newDocumentName;
         }
+
         $suscription->save();
 
         return redirect('suscriptions')->with('process_result',['status' => $status, 'content' => $content]);

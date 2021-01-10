@@ -45,8 +45,12 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="font-weight-bold">{{ __("Full Name") }}:&nbsp;</td>
+                                            <td class="font-weight-bold">{{ __("Name") }}:&nbsp;</td>
                                             <td>{{ $user->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">{{ __("Surame") }}:&nbsp;</td>
+                                            <td>{{ $user->surname }}</td>
                                         </tr>
                                         <tr>
                                             <td class="font-weight-bold">{{ __("Email") }}:&nbsp;</td>

@@ -51,7 +51,7 @@ class RolesController extends Controller
         $content = __("Updated Role");
 
         $request->validate([
-            'name' => ['required','string', 'max:20', Rule::unique('roles')->ignore($id)],
+            'name' => ['required','alpha','max:20', Rule::unique('roles')->ignore($id)],
             'permission' => 'required',
         ]);
 

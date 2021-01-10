@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Auth\Events\Registered;
+use App\Hotel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -64,7 +65,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'alpha', 'max:255'],
+            'surname' => ['required', 'alpha', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'numeric'],
             'hostname' => ['required', 'string', 'max:20', 'unique:users'],
@@ -82,6 +84,7 @@ class RegisterController extends Controller
     {
         $user = [
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'hostname' => $data['hostname'],
@@ -100,6 +103,12 @@ class RegisterController extends Controller
         //$user->createAsStripeCustomer();
 
         $user->assignRole('user');
+
+        $hotel = new Hotel ([
+            'user_id' => $user->id
+        ]);
+
+        $hotel->save();
 
         $this->guard()->login($user);
 

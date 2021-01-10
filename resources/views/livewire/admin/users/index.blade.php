@@ -31,7 +31,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">{{ __("ID") }}</th>
-                          <th class="text-center">{{ __("Name") }}</th>
+                          <th class="text-center">{{ __("Full Name") }}</th>
                           <th class="text-center">{{ __("Email") }}</th>
                           <th class="text-center">{{ __("Type") }}</th>
                           <th class="text-center">{{ __("Status") }}</th>
@@ -42,7 +42,7 @@
                         @foreach($users as $value)
                           <tr>
                             <td class="text-center">{{ $value->id }}</td>
-                            <td class="text-center">{{ $value->name }}</td>
+                            <td class="text-center">{{ $value->name }} {{ $value->surname }}</td>
                             <td class="text-center">{{ $value->email }}</td>
                             <td class="text-center">{{ $value->type }}</td>
                             <td class="text-center">{{ $value->status }}</td>

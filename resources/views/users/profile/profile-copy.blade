@@ -1,0 +1,717 @@
+@extends('layouts.vuexy')
+
+@section('title')
+{{ __("Edit Profile") }}
+@endsection
+
+@section('extra-css')
+@endsection
+
+@section('content')
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ __("Edit Profile") }}
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <form id="form_validation" method="POST" action="{{ route('profile.update',$user->id) }}" enctype="multipart/form-data" novalidate>
+                                        @csrf
+                                        <input name="_method" type="hidden" value="PUT">
+                                        <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
+                                            <div class="media">
+                                                <img src="{{ asset(Auth::user()->avatar) }}" class="rounded mr-75" alt="profile image" height="120" width="120">
+                                                <div class="media-body mt-75">
+                                                    <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
+                                                        <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Upload new photo</label>
+                                                        <input type="file" id="account-upload"  @error('avatar') is-invalid @enderror name="avatar" hidden>
+                                                            @error('avatar') <span class="text-danger">{{ $message }}</span>@enderror
+                                                    </div>
+                                                    <p class="text-muted ml-75 mt-50"><small>Allowed JPG, SVG or PNG. Max size of 5000kB</small></p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="account-name">{{ __("Full Name") }}</label>
+                                                            <input type="text" class="form-control" @error('name') is-invalid @enderror name="name" value="{{$user->name}}" required data-validation-required-message="This name field is required">
+                                                            @error('name') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="account-e-mail">{{ __("Email") }}</label>
+                                                            <input type="email" class="form-control"  @error('email') is-invalid @enderror name="email" value="{{$user->email}}" required data-validation-required-message="This email field is required">
+                                                            @error('email') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="account-company">{{ __("Mobile") }}</label>
+                                                        <input type="text" class="form-control" @error('mobile') is-invalid @enderror name="mobile" value="{{$user->mobile ? $user->mobile:old('mobile')}}">
+                                                        @error('mobile') <span class="text-danger">{{ $message }}</span>@enderror
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="name_hotel">{{ __("Name Hotel") }}</label>
+                                                            <input type="text" class="form-control" @error('name_hotel') is-invalid @enderror name="name_hotel" value="{{$user->name_hotel ? $user->name_hotel:old('name_hotel')}}" required data-validation-required-message="This name field is required">
+                                                            @error('name_hotel') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="description">{{ __("Description") }}</label>
+                                                            <input type="text" class="form-control" @error('description') is-invalid @enderror name="description" value="{{$user->description ? $user->description:old('description')}}" required data-validation-required-message="This name field is required">
+                                                            @error('description') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="instagram">{{ __("Instagram") }}</label>
+                                                            <input type="text" class="form-control" @error('instagram') is-invalid @enderror name="instagram" value="{{$user->instagram ? $user->instagram:old('instagram')}}" required data-validation-required-message="This name field is required">
+                                                            @error('instagram') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="facebook">{{ __("Facebook") }}</label>
+                                                            <input type="text" class="form-control" @error('facebook') is-invalid @enderror name="facebook" value="{{$user->facebook ? $user->facebook:old('facebook')}}" required data-validation-required-message="This name field is required">
+                                                            @error('facebook') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="linkedin">{{ __("LinkedIn") }}</label>
+                                                            <input type="text" class="form-control" @error('linkedin') is-invalid @enderror name="linkedin" value="{{$user->linkedin ? $user->linkedin:old('linkedin')}}" required data-validation-required-message="This name field is required">
+                                                            @error('linkedin') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="twitter">{{ __("Twitter") }}</label>
+                                                            <input type="text" class="form-control" @error('twitter') is-invalid @enderror name="twitter" value="{{$user->twitter ? $user->twitter:old('twitter')}}" required data-validation-required-message="This name field is required">
+                                                            @error('twitter') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="frontdesk_phone">{{ __("Front desk phone") }}</label>
+                                                            <input type="text" class="form-control" @error('frontdesk_phone') is-invalid @enderror name="frontdesk_phone" value="{{$user->frontdesk_phone ? $user->frontdesk_phone:old('frontdesk_phone')}}" required data-validation-required-message="This name field is required">
+                                                            @error('frontdesk_phone') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="reservations_phone">{{ __("Reservations phone") }}</label>
+                                                            <input type="text" class="form-control" @error('reservations_phone') is-invalid @enderror name="reservations_phone" value="{{$user->reservations_phone ? $user->reservations_phone:old('reservations_phone')}}" required data-validation-required-message="This name field is required">
+                                                            @error('reservations_phone') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="frontdesk_email">{{ __("Front desk email") }}</label>
+                                                            <input type="text" class="form-control" @error('frontdesk_email') is-invalid @enderror name="frontdesk_email" value="{{$user->frontdesk_email ? $user->frontdesk_email:old('frontdesk_email')}}" required data-validation-required-message="This name field is required">
+                                                            @error('frontdesk_email') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="reservations_email">{{ __("Reservations email") }}</label>
+                                                            <input type="text" class="form-control" @error('reservations_email') is-invalid @enderror name="reservations_email" value="{{$user->reservations_email ? $user->reservations_email:old('reservations_email')}}" required data-validation-required-message="This name field is required">
+                                                            @error('reservations_email') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="billing_email">{{ __("Billing email") }}</label>
+                                                            <input type="text" class="form-control" @error('billing_email') is-invalid @enderror name="billing_email" value="{{$user->billing_email ? $user->billing_email:old('billing_email')}}" required data-validation-required-message="This name field is required">
+                                                            @error('billing_email') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="location">{{ __("Location") }}</label>
+                                                            <input type="text" class="form-control" @error('location') is-invalid @enderror name="location" value="{{$user->location ? $user->location:old('location')}}" required data-validation-required-message="This name field is required">
+                                                            @error('location') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="floor_number">{{ __("Floor Number") }}</label>
+                                                            <input type="text" class="form-control" @error('floor_number') is-invalid @enderror name="floor_number" value="{{$user->floor_number ? $user->floor_number:old('floor_number')}}" required data-validation-required-message="This name field is required">
+                                                            @error('floor_number') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="amenities">{{ __("Amenities") }}</label>
+                                                            <input type="text" class="form-control" @error('amenities') is-invalid @enderror name="amenities" value="{{$user->amenities ? $user->amenities:old('amenities')}}" required data-validation-required-message="This name field is required">
+                                                            @error('amenities') <span class="text-danger">{{ $message }}</span>@enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <a href="{{ route('home') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                    <button type="submit" class="btn btn-primary float-right">{{ __("Save") }}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- account setting page end -->
+            </div>
+        </div>
+    </div>
+
+        <!-- BEGIN: Content-->
+        <div class="app-content content">
+            <div class="content-overlay"></div>
+            <div class="header-navbar-shadow"></div>
+            <div class="content-wrapper">
+                <div class="content-header row">
+                    <div class="content-header-left col-md-9 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h2 class="content-header-title float-left mb-0">Form Wizard</h2>
+                                <div class="breadcrumb-wrapper col-12">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="#">Forms</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Form Wizard
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                        <div class="form-group breadcrum-right">
+                            <div class="dropdown">
+                                <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
+                                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-body">
+                    <!-- Form wizard with number tabs section start -->
+                    <section id="number-tabs">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Form wizard with number tabs</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <p>Create neat and clean form wizard using <code>.wizard-circle</code> class.</p>
+                                            <form action="#" class="number-tab-steps wizard-circle">
+    
+                                                <!-- Step 1 -->
+                                                <h6>Step 1</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName1">First Name </label>
+                                                                <input type="text" class="form-control" id="firstName1">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="lastName1">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="emailAddress1">Email</label>
+                                                                <input type="email" class="form-control" id="emailAddress1">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="location1">City</label>
+                                                                <select class="custom-select form-control" id="location1" name="location">
+                                                                    <option value="new-york">New York</option>
+                                                                    <option value="chicago">Chicago</option>
+                                                                    <option value="san-francisco">San Francisco</option>
+                                                                    <option value="boston">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 2 -->
+                                                <h6>Step 2</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="proposalTitle1">Proposal Title</label>
+                                                                <input type="text" class="form-control" id="proposalTitle1">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jobtitle">Job Title</label>
+                                                                <input type="text" class="form-control" id="jobtitle">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="shortDescription1">Short Description :</label>
+                                                                <textarea name="shortDescription" id="shortDescription1" rows="5" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 3 -->
+                                                <h6>Step 3</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="eventName1">Event Name :</label>
+                                                                <input type="text" class="form-control" id="eventName1">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventType1">Event Status :</label>
+                                                                <select class="custom-select form-control" id="eventType1" data-placeholder="Type to search cities" name="eventType1">
+                                                                    <option value="Banquet">Planning</option>
+                                                                    <option value="Fund Raiser">In Process</option>
+                                                                    <option value="Dinner Party">Finished</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="eventLocation1">Event Location :</label>
+                                                                <select class="custom-select form-control" id="eventLocation1" name="location">
+                                                                    <option value="new-york">New York</option>
+                                                                    <option value="chicago">Chicago</option>
+                                                                    <option value="san-francisco">San Francisco</option>
+                                                                    <option value="boston">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group d-flex align-items-center pt-md-2">
+                                                                <label class="mr-2">Requirements :</label>
+                                                                <div class="c-inputs-stacked">
+                                                                    <div class="d-inline-block mr-2">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Staffing</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Catering</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Form wizard with number tabs section end -->
+    
+                    <!-- Form wizard with icon tabs section start -->
+                    <section id="icon-tabs">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Form wizard with icon tabs</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <p>Add <code>.icons-tab-steps</code> class to get desired icons in tab.</p>
+                                            <form action="#" class="icons-tab-steps wizard-circle">
+    
+                                                <!-- Step 1 -->
+                                                <h6><i class="step-icon feather icon-home"></i> Step 1</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName11">First Name </label>
+                                                                <input type="text" class="form-control" id="firstName11">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="lastName11">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName11">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="emailAddress11">Email</label>
+                                                                <input type="email" class="form-control" id="emailAddress11">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="location11">City</label>
+                                                                <select class="custom-select form-control" id="location11" name="location">
+                                                                    <option value="new-york">New York</option>
+                                                                    <option value="chicago">Chicago</option>
+                                                                    <option value="san-francisco">San Francisco</option>
+                                                                    <option value="boston">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 2 -->
+                                                <h6><i class="step-icon feather icon-briefcase"></i> Step 2</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="proposalTitle11">Proposal Title</label>
+                                                                <input type="text" class="form-control" id="proposalTitle11">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jobtitle11">Job Title</label>
+                                                                <input type="text" class="form-control" id="jobtitle11">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="shortDescription11">Short Description :</label>
+                                                                <textarea name="shortDescription" id="shortDescription11" rows="5" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 3 -->
+                                                <h6><i class="step-icon feather icon-image"></i> Step 3</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="eventName11">Event Name :</label>
+                                                                <input type="text" class="form-control" id="eventName11">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventType11">Event Status :</label>
+                                                                <select class="custom-select form-control" id="eventType11" data-placeholder="Type to search cities" name="eventType11">
+                                                                    <option value="Banquet">Planning</option>
+                                                                    <option value="Fund Raiser">In Process</option>
+                                                                    <option value="Dinner Party">Finished</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="eventLocation11">Event Location :</label>
+                                                                <select class="custom-select form-control" id="eventLocation11" name="location">
+                                                                    <option value="new-york">New York</option>
+                                                                    <option value="chicago">Chicago</option>
+                                                                    <option value="san-francisco">San Francisco</option>
+                                                                    <option value="boston">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group d-flex align-items-center pt-md-2">
+                                                                <label class="mr-2">Requirements :</label>
+                                                                <div class="c-inputs-stacked">
+                                                                    <div class="d-inline-block mr-2">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Staffing</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Catering</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Form wizard with icon tabs section end -->
+    
+                    <!-- Form wizard with step validation section start -->
+                    <section id="validation">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Validation Example</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <form action="#" class="steps-validation wizard-circle">
+                                                <!-- Step 1 -->
+                                                <h6><i class="step-icon feather icon-home"></i> Step 1</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName3">
+                                                                    First Name
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="firstName3" name="firstName">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="lastName3">
+                                                                    Last Name
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="lastName3" name="lastName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="emailAddress5">
+                                                                    Email
+                                                                </label>
+                                                                <input type="email" class="form-control required" id="emailAddress5" name="emailAddress">
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="location">
+                                                                    City
+                                                                </label>
+                                                                <select class="custom-select form-control" id="location" name="location">
+                                                                    <option value="">New York</option>
+                                                                    <option value="Amsterdam">Chicago</option>
+                                                                    <option value="Berlin">San Francisco</option>
+                                                                    <option value="Frankfurt">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 2 -->
+                                                <h6><i class="step-icon feather icon-briefcase"></i> Step 2</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="proposalTitle3">
+                                                                    Proposal Title
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="proposalTitle3" name="proposalTitle">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jobTitle5">
+                                                                    Job Title
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="jobTitle5" name="jobTitle">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="shortDescription3">Short Description</label>
+                                                                <textarea name="shortDescription" id="shortDescription3" rows="4" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+    
+                                                <!-- Step 3 -->
+                                                <h6><i class="step-icon feather icon-image"></i> Step 3</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="eventName3">
+                                                                    Event Name
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="eventName3" name="eventName">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventStatus3">
+                                                                    Event Status
+                                                                </label>
+                                                                <select class="custom-select form-control required" id="eventStatus3" name="eventStatus">
+                                                                    <option value="Planning">Planning</option>
+                                                                    <option value="In Progress">In Progress</option>
+                                                                    <option value="Finished">Finished</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="eventLocation3">
+                                                                    Event Location
+                                                                </label>
+                                                                <select class="custom-select form-control required" id="eventLocation3" name="eventStatus">
+                                                                    <option value="Planning">New York</option>
+                                                                    <option value="In Progress">Chicago</option>
+                                                                    <option value="Finished">San Francisco</option>
+                                                                    <option value="Finished">Boston</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group d-flex align-items-center pt-md-2">
+                                                                <label class="mr-2">Requirements :</label>
+                                                                <div class="c-inputs-stacked">
+                                                                    <div class="d-inline-block mr-2">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Staffing</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Catering</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Form wizard with step validation section end -->
+    
+                </div>
+            </div>
+        </div>
+        <!-- END: Content-->
+@endsection

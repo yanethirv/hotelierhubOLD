@@ -13,7 +13,8 @@ class UserSeed extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Super Admin',
+            'name' => 'Name',
+            'surname' => 'Surname',
             'email' => 'superadmin@hotelierhub.net',
             'password' => bcrypt('password'),
             'type' => 'platform',
@@ -22,7 +23,8 @@ class UserSeed extends Seeder
         $user->assignRole('super-admin');
 
         $user = User::create([
-            'name' => 'Admin Hotelier Hub',
+            'name' => 'Name',
+            'surname' => 'Surname',
             'email' => 'admin@hotelierhub.net',
             'password' => bcrypt('password'),
             'type' => 'platform',
@@ -31,7 +33,8 @@ class UserSeed extends Seeder
         $user->assignRole('admin');
 
         $user = User::create([
-            'name' => 'User Hotelier Hub',
+            'name' => 'Name',
+            'surname' => 'Surname',
             'email' => 'user@hotelierhub.net',
             'password' => bcrypt('password'),
             'type' => 'platform',

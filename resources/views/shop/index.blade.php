@@ -68,7 +68,11 @@
                                                                 {{ __("Purchased") }}
                                                             </button>
                                                         @endif
-                                                        <a href="{{ route('product-document-download',$product->document) }}" class="btn btn-outline-primary float-right waves-effect waves-light">{{ __("Download Info") }}</a>
+                                                        
+                                                        @if(is_null($product->document))
+                                                        @else
+                                                            <a class="btn btn-outline-primary float-right waves-effect waves-light" href="{{ asset($product->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

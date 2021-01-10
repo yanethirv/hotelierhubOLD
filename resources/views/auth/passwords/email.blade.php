@@ -49,7 +49,8 @@
                         <div class="card bg-authentication rounded-0 mb-0 w-100">
                             <div class="row m-0">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center p-0">
-                                    <img src="{{ asset('images/pages/reset-password.png') }}" alt="branding logo">
+                                    <!--<img src="{{ asset('images/pages/reset-password.png') }}" alt="branding logo">-->
+                                    <h1 class="text-primary">HOTELIER HUB</h1>
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
                                     <div class="card rounded-0 mb-0 px-2">

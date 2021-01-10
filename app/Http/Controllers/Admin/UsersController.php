@@ -84,9 +84,9 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|alpha|max:255',
             'email' => 'required|email|unique:users,email',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|string|max:20',
             'password' => 'required|min:5',
             'roles' => 'required'
         ]);
@@ -172,9 +172,9 @@ class UsersController extends Controller
         $content = __("Updated User");
 
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|alpha|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|string|max:20',
             'roles' => 'required',
             'status' => 'required'
         ]);

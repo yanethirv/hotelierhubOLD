@@ -18,6 +18,7 @@ class CreateHotelsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->string("name", 100)->unique();
+            $table->varchar("range_rooms", 10);
             $table->text("description");
             $table->string("instagram", 100);
             $table->string("facebook", 100);

@@ -45,6 +45,11 @@
                                 @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group ">
+                                <label class="form-label">{{ __("Surname") }}</label>
+                                {!! Form::text('surname', null, array('placeholder' => '','class' => 'form-control')) !!}
+                                @error('surname') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="form-group ">
                                 <label class="form-label">{{ __("Email") }}</label>
                                 {!! Form::text('email', null, array('placeholder' => '','class' => 'form-control')) !!}
                                 @error('email') <span class="text-danger">{{ $message }}</span>@enderror

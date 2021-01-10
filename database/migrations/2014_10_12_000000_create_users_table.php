@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('surname');
             $table->string('email')->unique();
             $table->string('mobile')->nullable();
             $table->string('avatar')->nullable();
@@ -24,21 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string("name_hotel", 100)->unique()->nullable();
-            $table->text("description")->nullable();
-            $table->string("instagram", 100)->nullable();
-            $table->string("facebook", 100)->nullable();
-            $table->string("linkedin", 100)->nullable();
-            $table->string("twitter", 100)->nullable();
-            $table->string("logo", 200)->nullable();
-            $table->string("frontdesk_phone", 100)->nullable();
-            $table->string("reservations_phone", 100)->nullable();
-            $table->string("frontdesk_email", 100)->nullable();
-            $table->string("reservations_email", 100)->nullable();
-            $table->string("billing_email", 100)->nullable();
-            $table->string("location", 200)->nullable();
-            $table->integer("floor_number")->nullable();
-            $table->text("amenities")->nullable();
         });
     }
 

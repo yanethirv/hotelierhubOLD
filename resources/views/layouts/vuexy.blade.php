@@ -28,7 +28,12 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/forms/wizard.css') }}">
     <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <!-- END: Custom CSS-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @yield('extra-css')
     @livewireStyles
 </head>
@@ -50,6 +55,10 @@
     <script src="{{ asset('vendors/js/vendors.min.js') }}"></script>
     <script src="{{ asset('vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendors/js/extensions/toastr.min.js') }}"></script>
+    <!-- END: Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('vendors/js/extensions/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('js/core/app-menu.js') }}"></script>
@@ -57,6 +66,10 @@
     <script src="{{ asset('js/scripts/components.js') }}"></script>
     <script src="{{ asset('js/scripts/extensions/sweet-alerts.min.js') }}"></script>
     <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{{ asset('js/scripts/forms/wizard-steps.js') }}"></script>
+    <!-- END: Page JS-->
 
     @include('common.messages-toastr')
     

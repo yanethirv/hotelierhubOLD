@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Auth;
-use App\User;
-use Illuminate\Validation\Rule;
 use Hash;
+use App\User;
+use App\Hotel;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -45,18 +46,18 @@ class ProfileController extends Controller
         $content = __("Updated Profile");
 
         $request->validate([
-            'name' => ['required','string', 'max:255'],
-            'email' => ['required','string', 'email', 'max:255',Rule::unique('users')->ignore($id)],
-            'avatar' => ['sometimes','mimes:jpeg,jpg,bmp,svg,png','max:5000']
+            'name' => ['required','alpha', 'max:255'],
+            'surname' => ['required','alpha', 'max:255'],
+            'email' => ['required', 'email', 'max:255',Rule::unique('users')->ignore($id)],
+            'mobile' => ['required','string', 'max:20'],
+            'avatar' => ['sometimes','mimes:jpeg,jpg,bmp,svg,png','max:5000'],
         ]);
 
-        $name = null;
         $newImageName = null;
 
         //check if file attached
         if($file = $request->file('avatar')){
             $tmp = explode('.', $file->getClientOriginalName());//get client file name
-            $name = $file->getClientOriginalName();
             $newImageName = round(microtime(true)).'.'.end($tmp);
             $file->move(public_path('/images/avatar'), $newImageName);
             $newImageName = '/images/avatar/' . $newImageName;

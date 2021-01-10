@@ -53,7 +53,7 @@ class PermissionsController extends Controller
         $content = 'Permission Created!';
 
         $request->validate([
-            'name' => ['required','unique:permissions'],
+            'name' => ['required','alpha','max:255','unique:permissions'],
         ]);
 
         $permission = Permission::create($request->all());

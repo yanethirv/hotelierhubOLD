@@ -80,7 +80,7 @@
                     </li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none">
-                                <span class="user-name text-bold-600">{{ Auth::user()->name }}</span>
+                                <span class="user-name text-bold-600">{{ Auth::user()->name }} {{ Auth::user()->surname }}</span>
                                 <span class="user-status">{{ Auth::user()->status }}</span>
                             </div>
                             <span><img class="round" src="{{ asset(Auth::user()->avatar) }}" alt="avatar" height="40" width="40"></span>
@@ -88,7 +88,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{ route('profile.index') }}""><i class="feather icon-user"></i> {{ __("Edit Profile") }}</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('update-password.edit',[Auth::user()->id]) }}"><i class="feather icon-user"></i> {{ __("Change Password") }}</a>
+                            <a class="dropdown-item" href="{{ route('update-password.edit',[Auth::user()->id]) }}"><i class="feather icon-lock"></i> {{ __("Change Password") }}</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

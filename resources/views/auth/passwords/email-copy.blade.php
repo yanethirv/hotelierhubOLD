@@ -9,7 +9,7 @@
     <meta name="description" content="Hotelier Hub">
     <meta name="keywords" content="Hotelier">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Hotelier Hub - {{ __("Login") }}</title>
+    <title>Hotelier Hub - {{ __("Reset Password") }}</title>
     <link rel="apple-touch-icon" href="{{ asset('images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -49,71 +49,47 @@
                         <div class="card bg-authentication rounded-0 mb-0 w-100">
                             <div class="row m-0">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center p-0">
-                                    <!--<img src="{{ asset('images/pages/login.png') }}" alt="branding logo">-->
-                                    <h1 class="text-primary">HOTELIER HUB</h1>
+                                    <img src="{{ asset('images/pages/reset-password.png') }}" alt="branding logo">
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
                                     <div class="card rounded-0 mb-0 px-2">
                                         <div class="card-header pb-1">
                                             <div class="card-title">
-                                                <h4 class="mb-0">{{ __("Login") }}</h4>
+                                                <h4 class="mb-0">{{ __('Reset Password') }}</h4>
                                             </div>
                                         </div>
-                                        <p class="px-2">{{ __("Welcome back, please login to your account.") }}</p>
+                                        <p class="px-2">{{ __('Please enter your new password.') }}</p>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form method="POST" action="{{ route('login') }}">
+                                                @if (session('status'))
+                                                    <div class="alert alert-success" role="alert">
+                                                        {{ session('status') }}
+                                                    </div>
+                                                @endif
+
+                                                <form method="POST" action="{{ route('password.email') }}">
                                                     @csrf
-                                                    <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input id="email" type="email" class="form-control" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="{{ __('Email') }}" required>
+                                                    <fieldset class="form-label-group">
+                                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus required>
                                                         @error('email')
-                                                        <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
-                                                            <i class="feather icon-info mr-1 align-middle"></i>
-                                                            <span>{{ $message }}</span>
-                                                        </div>
+                                                            <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
+                                                                <i class="feather icon-info mr-1 align-middle"></i>
+                                                                <span>{{ $message }}</span>
+                                                            </div>
                                                         @enderror
-                                                        <div class="form-control-position">
-                                                            <i class="feather icon-user"></i>
-                                                        </div>
                                                         <label for="email">{{ __('E-Mail Address') }}</label>
                                                     </fieldset>
 
-                                                    <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input id="password" type="password" class="form-control" @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="{{ __('Password') }}" required>
-                                                        @error('password')
-                                                        <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
-                                                            <i class="feather icon-info mr-1 align-middle"></i>
-                                                            <span>{{ $message }}</span>
+                                                    <div class="row pt-2">
+                                                        <div class="col-12 col-md-6 mb-1">
+                                                            <a href="{{ route('login') }}" class="btn btn-outline-primary btn-block px-0">{{ __('Go Back to Login') }}</a>
                                                         </div>
-                                                        @enderror
-
-                                                        <div class="form-control-position">
-                                                            <i class="feather icon-lock"></i>
-                                                        </div>
-                                                        <label for="user-password">{{ __('Password') }}</label>
-                                                    </fieldset>
-
-                                                    <!--<div class="g-recaptcha" data-sitekey="6LfRQycaAAAAACVh9Qn4udEwS6kZVNW-8skgs7Z1"></div>-->
-
-                                                    <div class="form-group d-flex justify-content-between align-items-center">
-                                                        <div class="text-left">
-                  
-                                                        </div>
-                                                        <div class="text-right">
-                                                            @if (Route::has('password.request'))
-                                                                <a class="card-link" href="{{ route('password.request') }}">
-                                                                    {{ __('Forgot your password?') }}
-                                                                </a>
-                                                            @endif
+                                                        <div class="col-12 col-md-6 mb-1">
+                                                            <button type="submit" class="btn btn-primary btn-block px-0">  {{ __('Send Password Reset Link') }}</button>
                                                         </div>
                                                     </div>
-                                                    <a href="{{ route('register') }}" class="btn btn-outline-primary float-left btn-inline">{{ __('Register') }}</a>
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">{{ __('Log In') }}</button>
                                                 </form>
                                             </div>
-                                        </div>
-                                        <div class="login-footer">
-                                            <br>
                                         </div>
                                     </div>
                                 </div>

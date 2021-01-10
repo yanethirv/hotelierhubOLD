@@ -56,44 +56,59 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:100',
             'price' => 'required|numeric',
             'cost' => 'required|numeric',
             'type_id' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'document' => 'required|file|max:5000|mimes:pdf'
+            'document' => 'sometimes|file|max:5000|mimes:pdf'
         ]);
 
         $status = 'success';
         $content = 'Product Created!';
 
-        $input = $request->all();
+        $newDocumentName = null;
 
-        $file = $request->file('document');
-        $ruta = public_path() . '/upload';
-        //$fileName = uniqid() . $file->getClientOriginalName();
-        $fileName = time().'.'.$file->getClientOriginalExtension();
-        $file->move($ruta, $fileName);
-        
-        //$product = Product::create($input);
+        if($file = $request->file('document')){
+            $tmp = explode('.', $file->getClientOriginalName());//get client file name
+            $newDocumentName = round(microtime(true)).'.'.end($tmp);
+            $file->move(public_path('/documents/products'), $newDocumentName);
+            $newDocumentName = '/documents/products/' . $newDocumentName;
 
-        $valor = $request->get('type_id');
-        $typeName = Type::select('name')
-                        ->where('id', '=', $valor)
-                        ->get();
+            $valor = $request->get('type_id');
+            $typeName = Type::select('name')
+                            ->where('id', '=', $valor)
+                            ->get();
+    
+            $product = new Product([
+                'name' => $request->get('name'),
+                'price' => $request->get('price'),
+                'cost' => $request->get('cost'),
+                'type_id' => $request->get('type_id'),
+                'type_name' =>  $typeName,
+                'status' => $request->get('status'),
+                'description' => $request->get('description'),
+                'document' => $newDocumentName
+            ]);
+        }
+        else{
+            $valor = $request->get('type_id');
+            $typeName = Type::select('name')
+                            ->where('id', '=', $valor)
+                            ->get();
+    
+            $product = new Product([
+                'name' => $request->get('name'),
+                'price' => $request->get('price'),
+                'cost' => $request->get('cost'),
+                'type_id' => $request->get('type_id'),
+                'type_name' =>  $typeName,
+                'status' => $request->get('status'),
+                'description' => $request->get('description')
+            ]);
+        }
 
-
-        $product = new Product([
-            'name' => $request->get('name'),
-            'price' => $request->get('price'),
-            'cost' => $request->get('cost'),
-            'type_id' => $request->get('type_id'),
-            'type_name' =>  $typeName,
-            'status' => $request->get('status'),
-            'description' => $request->get('description'),
-            'document' => $fileName
-        ]);
         $product->save();
 
         return redirect('products')->with('process_result',['status' => $status, 'content' => $content]);
@@ -119,12 +134,10 @@ class ProductController extends Controller
             'type_id' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'document' => 'file|max:5000|mimes:pdf'
+            'document' => 'sometimes|file|max:5000|mimes:pdf'
         ]);
 
-
         $product = Product::findOrFail($id);
-        //$product->update($input);
 
         $valor = $request->type_id;
         $typeName = Type::select('name')
@@ -138,14 +151,19 @@ class ProductController extends Controller
         $product->type_name  = $typeName;
         $product->status  = $request->status;
         $product->description  = $request->description;
-        if($request->file('document')){
-            $file = $request->file('document');
-            $ruta = public_path() . '/upload';
-            $fileName = time().'.'.$file->getClientOriginalExtension();
-            $file->move($ruta, $fileName);
-            $product->document  = $fileName;
+
+        $newDocumentName = null;
+
+        //check if file attached
+        if($file = $request->file('document')){
+            $tmp = explode('.', $file->getClientOriginalName());//get client file name
+            $newDocumentName = round(microtime(true)).'.'.end($tmp);
+            $file->move(public_path('/documents/products'), $newDocumentName);
+            $newDocumentName = '/documents/products/' . $newDocumentName;
+
+            $product->document  = $newDocumentName;
         }
-        
+
         $product->save();
         
         return redirect('products')->with('process_result',['status' => $status, 'content' => $content]);

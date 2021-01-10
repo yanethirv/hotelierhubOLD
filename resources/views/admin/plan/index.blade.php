@@ -71,7 +71,10 @@
                                                         <ul class="fa-ul">
                                                             <li><span class="fa-li"><i class="fa fa-check"></i></span>{{ __($plan->description) }}</li>
                                                         </ul>
-                                                        <a href="{{ route('plan-document-download',$plan->document) }}" class="btn btn-block btn-outline-primary float-right waves-effect waves-light mb-2">{{ __("Download Info") }}</a>
+                                                        @if(is_null($plan->document))
+                                                        @else
+                                                            <a class="btn btn-block btn-outline-primary float-right waves-effect waves-light mb-2" href="{{ asset($plan->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
+                                                        @endif
                                                         @if( ! auth()->user()->hasIncompletePayment('main'))
                                                             @if(auth()->user()->subscribed('main'))
                                                                 @if(auth()->user()->subscription('main')->stripe_plan === $plan->slug)

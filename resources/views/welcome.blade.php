@@ -36,9 +36,18 @@
             @if (Route::has('login'))
               @auth
                 <li class="flex items-center">
-                        <a class="lg:text-gray-800 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-md uppercase font-bold"
-                            href="{{ url('/home') }}"><span class="inline-block ml-2">Home</span></a>
-                    </li>
+                  <a class="lg:text-gray-800 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-md uppercase font-bold"
+                      href="{{ url('/home') }}"><span class="inline-block ml-2">{{ __("Home") }}</span></a>
+                </li>
+                <li class="flex items-center">
+                  <a class="lg:text-gray-800 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-md uppercase font-bold" 
+                      href="{{ route('logout') }}"
+                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <span class="inline-block ml-2"><i class="feather icon-power"></i>{{ __("Logout") }}</span></a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                  </form>
+                </li>
                     @else
                     <li class="flex items-center">
                         <a class="lg:text-gray-800 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-md uppercase font-bold"
