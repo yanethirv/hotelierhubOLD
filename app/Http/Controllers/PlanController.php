@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Laravel\Cashier\Exceptions\IncompletePayment;
 use App\Type;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class PlanController extends Controller
 {
@@ -20,7 +21,15 @@ class PlanController extends Controller
                 $priceCurrentPlan = $plan->amount;
             }
         }
-        return view("admin.plan.index", compact("plans", "priceCurrentPlan"));
+
+        $hotel = DB::table('users')
+            ->leftJoin('hotels', 'hotels.user_id','users.id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+        //dd($hotel->range_rooms);
+
+        return view("admin.plan.index", compact("plans", "priceCurrentPlan", "hotel"));
     }
 
     public function create() {
@@ -65,10 +74,9 @@ class PlanController extends Controller
                     $file->move(public_path('/documents/subscriptions'), $newDocumentName);
                     $newDocumentName = '/documents/subscriptions/' . $newDocumentName;
 
-                    $valor = $request->get('type_id');
                     $typeName = Type::select('name')
-                                    ->where('id', '=', $valor)
-                                    ->get();
+                                    ->where('id', '=', $request->type_id)
+                                    ->first();
 
                     \App\Plan::create([
                         'product' => $plan->product,
@@ -78,15 +86,15 @@ class PlanController extends Controller
                         'slug' => $plan->id,
                         'cost' => request('plan_cost'),
                         'type_id' => request('type_id'),
-                        'type_name' =>  $typeName,
+                        'type_name' =>  $typeName->name,
                         'status' => request('status'),
                         'document' => $newDocumentName,
                     ]);
                 }else{
-                    $valor = $request->get('type_id');
+
                     $typeName = Type::select('name')
-                                    ->where('id', '=', $valor)
-                                    ->get();
+                                    ->where('id', '=', $request->get('type_id'))
+                                    ->first();
 
                     \App\Plan::create([
                         'product' => $plan->product,
@@ -96,7 +104,7 @@ class PlanController extends Controller
                         'slug' => $plan->id,
                         'cost' => request('plan_cost'),
                         'type_id' => request('type_id'),
-                        'type_name' =>  $typeName,
+                        'type_name' =>  $typeName->name,
                         'status' => request('status'),
                     ]);
                 }
@@ -142,13 +150,12 @@ class PlanController extends Controller
 
         $suscription =  \App\Plan::findOrFail($id);
   
-        $valor = $request->type_id;
         $typeName = Type::select('name')
-                        ->where('id', '=', $valor)
-                        ->get();
+                        ->where('id', '=', $request->type_id)
+                        ->first();
 
         $suscription->type_id  = $request->type_id;
-        $suscription->type_name  = $typeName;
+        $suscription->type_name  = $typeName->name;
         $suscription->status  = $request->status;
         $suscription->description  = $request->description;
         
@@ -178,6 +185,7 @@ class PlanController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function buy () {
+
         if ( ! auth()->user()->hasPaymentMethod()) {
             $status = 'warning';
             $content = __("Please, add a card to sign up for a suscription");

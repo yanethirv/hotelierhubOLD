@@ -43,20 +43,19 @@
                       <td class="text-center">{{ $orderLine->order->user->hostname }}</td>
                       <td class="text-center">{{ $orderLine->product->name }}</td>
                         @if ($orderLine->status === 'wait')
-                          <i class="fa fa-circle font-small-3 text-warning mr-50"></i>
-                          <td class="text-center">{{ __("On Wait") }}</td>
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-warning mr-50"></i> {{ __("On Wait") }}</td>
                         @endif
                         @if ($orderLine->status === 'process')
-                          <td class="text-center">{{ __("In Process") }}</td>
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-primary mr-50"></i> {{ __("In Process") }}</td>
                         @endif
                         @if ($orderLine->status === 'active')
-                          <td class="text-center">{{ __("Active") }}</td>
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-success mr-50"></i> {{ __("Active") }}</td>
                         @endif
                         @if ($orderLine->status === 'inactive')
-                          <td class="text-center">{{ __("Inactive") }}</td>
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-danger mr-50"></i> {{ __("Inactive") }}</td>
                         @endif
                         @if ($orderLine->status === 'review')
-                          <td class="text-center">{{ __("On Review") }}</td>
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-info mr-50"></i> {{ __("On Review") }}</td>
                         @endif
                       <td class="text-center">
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
@@ -122,7 +121,7 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="{{ route('products-request') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                        <a href="{{ route('services-request') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                         <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                                     </form>
                                     </div>

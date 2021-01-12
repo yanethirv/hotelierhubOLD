@@ -3,7 +3,7 @@
     <div class="card-content">
         <div class="table-responsive">
             <table class="table">
-                <thead class="thead-dark text-center">
+                <thead class="table-primary text-center">
                     <tr>
                         <th scope="col">{{ __("Service") }}</th>
                         <th scope="col">{{ __("Total Price") }}</th>
@@ -16,7 +16,7 @@
                             <td class="text-left">{{ $product->name }}</td>
                             <td>{{ $cart->totalAmountForProduct($product) }}</td>
                             <td>
-                                <form method="POST" action="{{ route('product.delete', ["id" => $product->id]) }}">
+                                <form method="POST" action="{{ route('service.delete', ["id" => $product->id]) }}">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="alert alert-danger">
@@ -68,7 +68,7 @@
                                 @else
                                     <form method="POST" action="{{ route('orders.process') }}">
                                     @csrf
-                                        <button type="submit" class="btn btn-primary btn-block place-order waves-effect waves-light">
+                                        <button type="submit" class="btn btn-success btn-block place-order waves-effect waves-light">
                                             <i class="fa fa-credit-card"></i> {{ __("PLACE ORDER") }}
                                         </button>
                                     </form>

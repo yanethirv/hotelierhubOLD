@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Create Product") }}
+{{ __("Create Service") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ __("Products") }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Services") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("Create Product") }}
+                                    <li class="breadcrumb-item active">{{ __("Create Services") }}
                                     </li>
                                 </ol>
                             </div>
@@ -37,7 +37,7 @@
                 <div class="col-lg-7 mx-auto">
                     <div class="bg-white rounded-lg shadow-sm p-5">
                         <h3 class="mb-4 text-center">{{ __("Create Product") }}</h3>
-                        <form action="{{ route('product.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <form action="{{ route('service.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
@@ -85,7 +85,7 @@
                                 <input type="file" name="document">
                                 @error('document') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
-                            <a href="{{ route('products') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                            <a href="{{ route('services') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                         </form>
                     </div>

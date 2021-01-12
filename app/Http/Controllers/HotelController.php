@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Hotel;
+use App\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HotelController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,10 @@ class HotelController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $positions = Position::all();
+
+        return view('users.profile.hotel-profile',compact('user', 'positions'));
     }
 
     /**

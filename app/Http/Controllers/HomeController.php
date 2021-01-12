@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\User;
 use App\Order;
 use App\OrderLine;
 use App\Subscription;
-use App\User;
 use App\ProductRequest;
 use App\SubscriptionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
-use DB;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         //DONUT - CLIENTS ESTATUS
         $usersStatus = (new LarapexChart)->setType('donut')
                 ->setDataset([
@@ -193,11 +193,11 @@ class HomeController extends Controller
             ]
         ]);
 
-        //TOTAL PRODUCTS REQUEST ACTIVE
+        //TOTAL Services Request ACTIVE
         $productsRequestActive = OrderLine::where('status', '=', 'active')->count();
-        //TOTAL PRODUCTS REQUEST PROCESS
+        //TOTAL Services Request PROCESS
         $productsRequestProcess = OrderLine::where('status', '=', 'process')->count();
-        //TOTAL PRODUCTS REQUEST WAIT
+        //TOTAL Services Request WAIT
         $productsRequestWait = OrderLine::where('status', '=', 'wait')->count();
 
         //TOTAL SUBSCRIPTIONS REQUEST ACTIVE

@@ -35,6 +35,6 @@ class ProductRequestController extends Controller
 
         $orderLine->update(['status'=>$request->status]);
 
-        return redirect('products-request')->with('process_result',['status' => $status, 'content' => $content]);
+        return redirect('services-request')->with('process_result',['status' => $status, 'content' => $content]);
     }
 }

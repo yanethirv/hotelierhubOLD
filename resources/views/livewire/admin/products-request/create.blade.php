@@ -22,7 +22,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ __("Products") }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Products") }}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{ __("Create Product Request") }}
                                     </li>
@@ -37,7 +37,7 @@
                 <div class="col-lg-7 mx-auto">
                     <div class="bg-white rounded-lg shadow-sm p-5">
                         <h3 class="mb-4 text-center">{{ __("Create Product") }}</h3>
-                        <form action="{{ route('product.store') }}" method="POST">
+                        <form action="{{ route('service.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
@@ -71,7 +71,7 @@
                                 <label class="form-label">{{ __("Description") }}</label>
                                 <textarea class="form-control" style="height:150px" name="description" placeholder="description"></textarea>
                             </div>
-                            <a href="{{ route('products') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                            <a href="{{ route('services') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                         </form>
                     </div>

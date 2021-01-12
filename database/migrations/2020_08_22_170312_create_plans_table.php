@@ -22,6 +22,7 @@ class CreatePlansTable extends Migration
             $table->string('nickname')->unique();
             $table->float('amount');
             $table->float('cost');
+            $table->string("range_rooms", 10)->default('0');
             $table->unsignedBigInteger("type_id")->comment("Tipo de plan");
             $table->text('description')->nullable();
             $table->enum('status',['active', 'inactive'])->default('active');

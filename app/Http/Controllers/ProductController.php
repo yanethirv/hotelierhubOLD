@@ -15,7 +15,10 @@ class ProductController extends Controller
         if (auth()->check()) {
             $coursesPurchased = auth()->user()->coursesPurchased();
         }
-        return view("shop.index", compact("products", "coursesPurchased"));
+
+        $types = Type::all();
+
+        return view("shop.index", compact("products", "coursesPurchased", "types"));
     }
 
     public function addToCart(int $id) {
@@ -76,34 +79,32 @@ class ProductController extends Controller
             $file->move(public_path('/documents/products'), $newDocumentName);
             $newDocumentName = '/documents/products/' . $newDocumentName;
 
-            $valor = $request->get('type_id');
             $typeName = Type::select('name')
-                            ->where('id', '=', $valor)
-                            ->get();
+                            ->where('id', '=', $request->type_id)
+                            ->first();
     
             $product = new Product([
                 'name' => $request->get('name'),
                 'price' => $request->get('price'),
                 'cost' => $request->get('cost'),
                 'type_id' => $request->get('type_id'),
-                'type_name' =>  $typeName,
+                'type_name' =>  $typeName->name,
                 'status' => $request->get('status'),
                 'description' => $request->get('description'),
                 'document' => $newDocumentName
             ]);
         }
         else{
-            $valor = $request->get('type_id');
             $typeName = Type::select('name')
-                            ->where('id', '=', $valor)
-                            ->get();
+            ->where('id', '=', $request->type_id)
+            ->first();
     
             $product = new Product([
                 'name' => $request->get('name'),
                 'price' => $request->get('price'),
                 'cost' => $request->get('cost'),
                 'type_id' => $request->get('type_id'),
-                'type_name' =>  $typeName,
+                'type_name' =>  $typeName->name,
                 'status' => $request->get('status'),
                 'description' => $request->get('description')
             ]);
@@ -111,7 +112,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('products')->with('process_result',['status' => $status, 'content' => $content]);
+        return redirect('services')->with('process_result',['status' => $status, 'content' => $content]);
     }
 
     public function edit($id)
@@ -139,16 +140,15 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $valor = $request->type_id;
         $typeName = Type::select('name')
-                        ->where('id', '=', $valor)
-                        ->get();
-
+                        ->where('id', '=', $request->type_id)
+                        ->first();
+        
         $product->name  = $request->name;
         $product->price  = $request->price;
         $product->cost  = $request->cost;
         $product->type_id  = $request->type_id;
-        $product->type_name  = $typeName;
+        $product->type_name  = $typeName->name;
         $product->status  = $request->status;
         $product->description  = $request->description;
 
@@ -166,7 +166,7 @@ class ProductController extends Controller
 
         $product->save();
         
-        return redirect('products')->with('process_result',['status' => $status, 'content' => $content]);
+        return redirect('services')->with('process_result',['status' => $status, 'content' => $content]);
     }
 
     public function viewDocument($id)

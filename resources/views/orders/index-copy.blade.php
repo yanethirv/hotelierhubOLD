@@ -33,7 +33,7 @@
 
         <div class="row justify-content-center">
             <table class="table">
-                <thead class="thead-dark text-center">
+                <thead class="table-primary text-center">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">{{ __("Price") }}</th>

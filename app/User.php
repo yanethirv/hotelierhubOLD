@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'mobile', 'avatar', 'hostname', 'password', 'status', 'type',
+        'name', 'surname', 'email', 'mobile', 'avatar', 'hostname', 'password', 'status', 'type', 'position_id'
     ];
 
     /**
@@ -68,5 +68,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function userCount(){
         return User::count();
+    }
+
+    public function position(){
+        return $this->hasOne(Position::class);
+    }
+
+    public function hotel(){
+        return $this->hasOne(Hotel::class);
     }
 }

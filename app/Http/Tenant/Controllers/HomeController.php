@@ -191,11 +191,11 @@ class HomeController extends Controller
             ]
         ]);
 
-        //TOTAL PRODUCTS REQUEST ACTIVE
+        //TOTAL Services Request ACTIVE
         $productsRequestActive = OrderLine::where('status', '=', 'active')->count();
-        //TOTAL PRODUCTS REQUEST PROCESS
+        //TOTAL Services Request PROCESS
         $productsRequestProcess = OrderLine::where('status', '=', 'process')->count();
-        //TOTAL PRODUCTS REQUEST WAIT
+        //TOTAL Services Request WAIT
         $productsRequestWait = OrderLine::where('status', '=', 'wait')->count();
 
         //TOTAL SUBSCRIPTIONS REQUEST ACTIVE

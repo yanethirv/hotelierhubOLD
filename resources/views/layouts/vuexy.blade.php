@@ -15,6 +15,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/forms/select/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/pickers/pickadate/pickadate.css') }}">
+    <!-- END: Vendor CSS-->
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
@@ -29,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/forms/wizard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/forms/validation/form-validation.css') }}">
     <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
@@ -56,10 +60,20 @@
     <script src="{{ asset('vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendors/js/extensions/toastr.min.js') }}"></script>
     <!-- END: Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('vendors/js/forms/select/select2.full.min.js') }}"></script>
+    <script src="{{ asset('vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ asset('vendors/js/pickers/pickadate/picker.js') }}"></script>
+    <script src="{{ asset('vendors/js/pickers/pickadate/picker.date.js') }}"></script>
+    <script src="{{ asset('vendors/js/extensions/dropzone.min.js') }}"></script>
+    <!-- END: Page Vendor JS-->
+
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('vendors/js/extensions/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
+
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('js/core/app-menu.js') }}"></script>
     <script src="{{ asset('js/core/app.js') }}"></script>
@@ -70,6 +84,10 @@
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('js/scripts/forms/wizard-steps.js') }}"></script>
     <!-- END: Page JS-->
+
+     <!-- BEGIN: Page JS-->
+     <script src="../../../app-assets/js/scripts/pages/account-setting.js"></script>
+     <!-- END: Page JS-->
 
     @include('common.messages-toastr')
     

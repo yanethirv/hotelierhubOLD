@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
-use Spatie\Permission\Models\Role;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Controller;
-use Illuminate\Validation\Rule;
-use App\UserLoginLog;
 use DB;
 use Hash;
+use App\User;
+use App\Hotel;
+use App\Position;
+use App\UserLoginLog;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
@@ -72,7 +74,9 @@ class UsersController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
 
-        return view('livewire.admin.users.create', compact('roles'));
+        $positions = Position::pluck('name', 'id')->all();
+
+        return view('livewire.admin.users.create', compact('roles', 'positions'));
     }
 
     /**
@@ -88,7 +92,8 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email',
             'mobile' => 'required|string|max:20',
             'password' => 'required|min:5',
-            'roles' => 'required'
+            'roles' => 'required',
+            'position_id' => 'required',
         ]);
 
         if ($this->tenantName) {
@@ -112,11 +117,29 @@ class UsersController extends Controller
             $content = 'User Created!';
 
             $input = $request->all();
+
+            //dd($request->roles);
+
             $input['password'] = Hash::make($input['password']);
-            $input['type'] = 'platform';
+
+            if ($request->input('position_id') != '1') {
+                $input['type'] = 'client';
+            }else{
+                $input['type'] = 'platform';
+            }
+            
         
             $user = User::create($input);
             $user->assignRole($request->input('roles'));
+
+            if ($user->type == 'client') {
+
+                $hotel = new Hotel ([
+                    'user_id' => $user->id
+                ]);
+        
+                $hotel->save();
+            }
 
             return redirect('users')->with('process_result',['status' => $status, 'content' => $content]);
 
@@ -140,7 +163,11 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('livewire.admin.users.show',compact('user'));
+        $position = Position::select('name')
+                            ->where('id', '=', $user->position_id)
+                            ->first();
+
+        return view('livewire.admin.users.show',compact('user', 'position'));
     }
 
 
@@ -155,8 +182,10 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
+        $positions = Position::pluck('name', 'id')->all();
+        $userPosition = $user->position_id;
 
-        return view('livewire.admin.users.edit', compact('user', 'roles','userRole'));
+        return view('livewire.admin.users.edit', compact('user', 'roles','userRole', 'positions', 'userPosition'));
     }
 
     /**
@@ -176,7 +205,8 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email,'.$id,
             'mobile' => 'required|string|max:20',
             'roles' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'position_id' => 'required',
         ]);
 
         $input = $request->all();

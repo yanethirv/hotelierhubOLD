@@ -6,6 +6,7 @@ use Auth;
 use Hash;
 use App\User;
 use App\Hotel;
+use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -28,9 +29,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
         $user = Auth::user();
-        return view('users.profile.profile',compact('user'));
+        $positions = Position::all();
+
+        return view('users.profile.profile',compact('user', 'positions'));
     }
 
     /**
@@ -51,6 +53,7 @@ class ProfileController extends Controller
             'email' => ['required', 'email', 'max:255',Rule::unique('users')->ignore($id)],
             'mobile' => ['required','string', 'max:20'],
             'avatar' => ['sometimes','mimes:jpeg,jpg,bmp,svg,png','max:5000'],
+            'position_id' => ['required'],
         ]);
 
         $newImageName = null;
@@ -62,6 +65,7 @@ class ProfileController extends Controller
             $file->move(public_path('/images/avatar'), $newImageName);
             $newImageName = '/images/avatar/' . $newImageName;
         }
+        
         $user = User::find(Auth::user()->id);
         $newImage = null;
         $newImage = $newImageName == null? $user->avatar:$newImageName;

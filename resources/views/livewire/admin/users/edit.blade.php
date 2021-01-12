@@ -65,6 +65,11 @@
                                 @error('roles') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group ">
+                                <label class="form-label">{{ __("Position in the Hotel") }}</label>
+                                {!! Form::select('position_id', $positions,$userPosition, array('class' => 'form-control')) !!}
+                                @error('position_id') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="form-group ">
                                 <label class="form-label">{{ __("Status") }}</label>
                                 {!! Form::select('status', [null => 'Select status'] + ['active' => 'active','inactive'=>'inactive'], null, ['class' => 'form-control']) !!}
                                 @error('status') <span class="text-danger">{{ $message }}</span>@enderror

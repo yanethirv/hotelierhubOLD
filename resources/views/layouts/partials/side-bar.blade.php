@@ -33,21 +33,21 @@
                     <li class="navigation-header"><span>{{ __("Marketplace Management") }}</span></li>
                     {{--  <li {{Route::is('plans.create')? 'class=active':''}} class=" nav-item"><a href="{{ route('plans.create') }}"><i class="feather icon-plus"></i><span class="menu-title">Crear Plan</span></a></li>--}}
                     <li class="{{ (request()->is('types')) ? 'active' : '' }}"><a href="{{url('types')}}"><i class="fa fa-tag"></i><span class="menu-title">{{ __("Types") }}</span></a></li>
-                    <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{ route('products') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Products") }}</span></a></li>
+                    <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{ route('services') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Services") }}</span></a></li>
                     <li class="{{ (request()->is('suscriptions')) ? 'active' : '' }}"><a href="{{ route('suscriptions') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions") }}</span></a></li>
                 @endrole
 
                 @role('super-admin|admin')
                     <li class="navigation-header"><span>{{ __("Requests Management") }}</span></li>
 
-                    <li class="{{ (request()->is('products-request')) ? 'active' : '' }}"><a href="{{ route('products-request') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Products Request") }}</span></a></li>
+                    <li class="{{ (request()->is('services-request')) ? 'active' : '' }}"><a href="{{ route('services-request') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Services Request") }}</span></a></li>
                     <li class="{{ (request()->is('subscriptions-request')) ? 'active' : '' }}"><a href="{{ route('subscriptions-request') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions Request") }}</span></a></li>
                 @endrole
 
                 <li class="navigation-header"><span>{{ __("User Account") }}</span></li>
                 <li {{Route::is('update-password.edit')? 'class=active':''}} class="nav-item"><a href="{{ route('update-password.edit',[Auth::user()->id]) }}"><i class="feather icon-unlock"></i><span class="menu-title">{{ __("Change Password") }}</span></a></li>
                 <li {{Route::is('profile.index')? 'class=active':''}} class="nav-item"><a href="{{ route('profile.index') }}"><i class="feather icon-user"></i><span class="menu-title">{{ __("Edit Profile") }}</span></a></li>
-                
+                <li {{Route::is('hotel-profile.index')? 'class=active':''}} class="nav-item"><a href="{{ route('hotel-profile.index') }}"><i class="fa fa-building-o"></i><span class="menu-title">{{ __("Edit Hotel Profile") }}</span></a></li>
                 @role('super-admin|user')
                     <li {{Route::is('billing.credit_card_form')? 'class=active':''}} class="nav-item"><a href="{{ route('billing.credit_card_form') }}"><i class="fa fa-credit-card"></i><span class="menu-title">{{ __("My Card") }}</span></a></li>
                     <li {{Route::is('orders.index')? 'class=active':''}} class="nav-item"><a href="{{ route('orders.index') }}"><i class="fa fa-list"></i><span class="menu-title">{{ __("My Orders") }}</span></a></li>
@@ -62,7 +62,7 @@
                             <li {{Route::is('services-recurring.index')? 'class=active':''}} class="is-shown"><a href="{{ route('services-recurring.index') }}"><i class="feather icon-circle"></i><span class="menu-title">{{ __("Recurring") }}</span></a></li>
                         </ul>
                     </li>--}}
-                    <li {{Route::is('shop')? 'class=active':''}} class="nav-item"><a href="{{ route('shop') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Products") }}</span></a></li>
+                    <li {{Route::is('shop')? 'class=active':''}} class="nav-item"><a href="{{ route('shop') }}"><i class="fa fa-rocket"></i><span class="menu-title">{{ __("Services") }}</span></a></li>
                     <li {{Route::is('plans.index')? 'class=active':''}} class="nav-item"><a href="{{ route('plans.index') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions") }}</span></a></li>
                 @endrole
 

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile')->nullable();
             $table->string('avatar')->nullable();
+            $table->foreign("position_id")->references("id")->on("positions")->default(1);
             $table->string('hostname')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

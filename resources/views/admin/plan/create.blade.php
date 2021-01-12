@@ -107,7 +107,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="status">{{ __("Status") }}</label>
                                     <div class="input-group">
@@ -118,7 +118,22 @@
                                     </div>
                                     @error('status') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-
+                                
+                                <div class="form-group">
+                                    <label for="range_rooms">{{ __("Range of Rooms") }}</label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="range_rooms">
+                                            <option value="1-5">1-5</option>
+                                            <option value="6-10">6-10</option>
+                                            <option value="11-15">11-15</option>
+                                            <option value="16-20">16-20</option>
+                                            <option value="21-30">21-30</option>
+                                            <option value="31-40">31-40</option>
+                                            <option value="41-100">41-100</option>
+                                        </select>
+                                    </div>
+                                    @error('range_rooms') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
 
                                 <div class="form-group">
                                     <label for="plan_description">{{ __("Description") }}</label>

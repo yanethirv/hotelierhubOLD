@@ -22,7 +22,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ __("Products") }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Products") }}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{ __("View Document Product") }}
                                     </li>

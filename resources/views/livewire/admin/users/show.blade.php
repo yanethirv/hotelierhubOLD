@@ -66,6 +66,10 @@
                                             <td class="font-weight-bold">{{ __("Mobile") }}:&nbsp;</td>
                                             <td>{{ $user->mobile }}</td>
                                         </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">{{ __("Position in the Hotel") }}:&nbsp;</td>
+                                            <td>{{ $position->name }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <br>

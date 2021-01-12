@@ -53,7 +53,7 @@
                             <h1 class="text-center my-2">{{ __("Order Information") }}</h1>
                             <div class="table-responsive">
                                 <table class="table mb-0">
-                                    <thead class="thead-dark text-center">
+                                    <thead class="table-primary text-center">
                                         <tr>
                                             <th scope="col">{{ __("ID Order") }}</th>
                                             <th scope="col">{{ __("Amount with Taxes") }}</th>
@@ -78,7 +78,7 @@
                         <div class="card">
                             <h1 class="text-center my-2">{{ __("Order Lines") }}</h1>
                             <table class="table mb-0">
-                                <thead class="thead-dark text-center">
+                                <thead class="table-primary text-center">
                                 <tr>
                                     <th scope="col">{{ __("Service") }}</th>
                                     <th scope="col">{{ __("Amount without Taxes") }}</th>

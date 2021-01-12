@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Products") }}
+{{ __("Services") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="">{{ __("Products") }}</a>
+                                    <li class="breadcrumb-item"><a href="">{{ __("Services") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("List Products") }}
+                                    <li class="breadcrumb-item active">{{ __("List Services") }}
                                     </li>
                                 </ol>
                             </div>

@@ -138,9 +138,9 @@ class ProductsComponent extends Component
     }
 
     if($this->selected_id)
-      session()->flash('message', __("Updated product"));
+      session()->flash('message', __("Updated Service"));
     else
-      session()->flash('message', __("Product created"));
+      session()->flash('message', __("Service created"));
 
     //Limpiar campos
     $this->resetInput();
@@ -160,9 +160,9 @@ class ProductsComponent extends Component
       $record = Product::find($id);
       $record->delete();
       $this->resetInput();
-      session()->flash('message', __("Product successfully removed."));
+      session()->flash('message', __("Service successfully removed."));
     } catch (\Exception $e) {
-        session()->flash('msg-error', __("Product cannot be removed, as it has a related transaction."));
+        session()->flash('msg-error', __("Service cannot be removed, as it has a related transaction."));
     }
   }
 

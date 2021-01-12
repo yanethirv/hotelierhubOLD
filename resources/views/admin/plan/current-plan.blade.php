@@ -9,7 +9,7 @@
         <div class="table-responsive">
             @if(auth()->user()->subscription('main'))
             <table class="table">
-                <thead class="thead-dark text-center">
+                <thead class="table-primary text-center">
                     <tr class="text-center" >
                         <th scope="col">{{ __("Suscription") }}</th>
                         <th scope="col">{{ __("Date") }}</th>

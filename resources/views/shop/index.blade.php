@@ -38,53 +38,57 @@
                 <div class="row match-height">
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-12">
                         <section id="basic-examples">
-                            <div class="row match-height">
-                                @forelse($products as $product)
-                                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <!--<img class="card-img img-fluid mb-1" src="../../../app-assets/images/pages/content-img-3.jpg" alt="Card image cap">-->
-                                                    <h5 class="my-1">{{ $product->name }}</h5>
-                                                    <p class="card-text  mb-0">{{ $product->description }}</p>
-                                                    <br>
-
-                                                    <span class="badge badge-warning badge-md mr-1 mb-1">{{ $product->type->name }}</span>
-                                                    <div class="d-flex justify-content-between mt-2">
-                                                        <small class="float-left font-weight-bold mb-25" id="example-caption-1"></small>
-                                                        <p class="float-left font-weight-bold mb-25" id="example-caption-2">{{ __("Price") }}: {{ format_currency_helper($product->price) }}</p>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-btns d-flex justify-content-between">
-                                                        @if(!in_array($product->id, $coursesPurchased))
-                                                            <form action="{{ route('product.add', ["id" => $product->id]) }}" method="POST">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    <i class="fa fa-cart-plus"></i> {{ __("Buy Service") }}
-                                                                </button>
-                                                            </form>
-                                                        @else
-                                                            <button class="btn gradient-light-info" disabled>
-                                                                {{ __("Purchased") }}
-                                                            </button>
-                                                        @endif
-                                                        
-                                                        @if(is_null($product->document))
-                                                        @else
-                                                            <a class="btn btn-outline-primary float-right waves-effect waves-light" href="{{ asset($product->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
-                                                        @endif
+                            @foreach ($types as $type)
+                            <h2 class="text-primary my-2">{{ $type->name }}</h2>
+                                <div class="row match-height">
+                                    @foreach ($products as $product)
+                                        @if ($product->type_id == $type->id)
+                                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <!--<img class="card-img img-fluid mb-1" src="../../../app-assets/images/pages/content-img-3.jpg" alt="Card image cap">-->
+                                                            <h5 class="my-1">{{ $product->name }}</h5>
+                                                            <p class="card-text  mb-0">{{ $product->description }}</p>
+                                                            <br>
+                                                            <!--<span class="badge badge-warning badge-md mr-1 mb-1">{{ $product->type->name }}</span>-->
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <small class="float-left font-weight-bold mb-25" id="example-caption-1"></small>
+                                                                <p class="float-left font-weight-bold mb-25" id="example-caption-2">{{ __("Price") }}: {{ format_currency_helper($product->price) }}</p>
+                                                            </div>
+                                                            <hr class="my-1">
+                                                            <div class="card-btns d-flex justify-content-between">
+                                                                @if(!in_array($product->id, $coursesPurchased))
+                                                                    <form action="{{ route('service.add', ["id" => $product->id]) }}" method="POST">
+                                                                    @csrf
+                                                                        <button type="submit" class="btn btn-primary">
+                                                                            <i class="fa fa-cart-plus"></i> {{ __("Buy Service") }}
+                                                                        </button>
+                                                                    </form>
+                                                                @else
+                                                                    <button class="btn gradient-light-info" disabled>
+                                                                        {{ __("Purchased") }}
+                                                                    </button>
+                                                                @endif
+                                                                            
+                                                                @if(is_null($product->document))
+                                                                    @else
+                                                                        <a class="btn btn-outline-primary float-right waves-effect waves-light" href="{{ asset($product->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @empty
-                                    <div class="alert alert-info text-center">{{ __('No services available.') }}</div>
-                                @endforelse
-                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <hr>
+                            @endforeach
                         </section>
                     </div>
                     <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12">
+                        <h2 class="text-primary my-2">Shopping Cart</h2>
                         @include('shop.sidebar')
                     </div>
                 </div>

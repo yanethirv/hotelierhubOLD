@@ -38,7 +38,7 @@
                         <div class="card">
                             <div class="table-responsive">
                                 <table class="table mb-0">
-                                    <thead class="thead-dark text-center">
+                                    <thead class="table-primary text-center">
                                         <tr>
                                             <th scope="col">{{ __("Date") }}</th>
                                             <th scope="col">{{ __("Amount") }}</th>

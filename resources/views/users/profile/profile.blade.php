@@ -57,7 +57,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="account-name">{{ __("Name") }}</label>
-                                                            <input type="text" class="form-control @error('name') is-invalid @enderror"  name="name" value="{{$user->name}}" required data-validation-required-message="This name field is required">
+                                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}}" required data-validation-required-message="This name field is required">
                                                             @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                                                         </div>
                                                     </div>
@@ -66,7 +66,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="account-surname">{{ __("Surname") }}</label>
-                                                            <input type="text" class="form-control" @error('surname') is-invalid @enderror name="surname" value="{{$user->surname}}" required data-validation-required-message="This surname field is required">
+                                                            <input type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{$user->surname}}" required data-validation-required-message="This surname field is required">
                                                             @error('surname') <span class="text-danger">{{ $message }}</span>@enderror
                                                         </div>
                                                     </div>
@@ -75,7 +75,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="account-e-mail">{{ __("Email") }}</label>
-                                                            <input type="email" class="form-control"  @error('email') is-invalid @enderror name="email" value="{{$user->email}}" required data-validation-required-message="This email field is required">
+                                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}" required data-validation-required-message="This email field is required">
                                                             @error('email') <span class="text-danger">{{ $message }}</span>@enderror
                                                         </div>
                                                     </div>
@@ -83,8 +83,25 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="account-company">{{ __("Mobile") }}</label>
-                                                        <input type="text" class="form-control" @error('mobile') is-invalid @enderror name="mobile" value="{{$user->mobile ? $user->mobile:old('mobile')}}" required data-validation-required-message="This mobile field is required"">
+                                                        <input type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{$user->mobile ? $user->mobile:old('mobile')}}" required data-validation-required-message="This mobile field is required"">
                                                         @error('mobile') <span class="text-danger">{{ $message }}</span>@enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="account-company">{{ __("Position in the Hotel") }}</label>
+                                                        <select class="custom-select form-control" id="position_id" name="position_id">
+                                                            @foreach ($positions as $position)
+                                                                <option value="{{ $position->id }}"
+                                                                    @if ($position->id === $user->position_id)
+                                                                        selected
+                                                                    @endif
+                                                                >
+                                                                {{ $position->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('position_id') <span class="text-danger">{{ $message }}</span>@enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-12">

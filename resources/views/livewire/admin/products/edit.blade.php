@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Edit Product") }}
+{{ __("Edit Service") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ __("Products") }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Services") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("Edit Product") }}
+                                    <li class="breadcrumb-item active">{{ __("Edit Services") }}
                                     </li>
                                 </ol>
                             </div>
@@ -36,8 +36,8 @@
             <div class="row">
                 <div class="col-lg-7 mx-auto">
                     <div class="bg-white rounded-lg shadow-sm p-5">
-                        <h3 class="mb-4 text-center">{{ __("Edit Product") }}</h3>
-                        <form action="{{ route('product.update',$product->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <h3 class="mb-4 text-center">{{ __("Edit Service") }}</h3>
+                        <form action="{{ route('service.update',$product->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -70,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="description">{{ __("Status") }}</label>
+                                <label for="status">{{ __("Status") }}</label>
                                 <div class="input-group">
                                     <select class="form-control" name="status">
                                         <option value="active"
@@ -126,7 +126,7 @@
                             </div>
 
                             
-                            <a href="{{ route('products') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                            <a href="{{ route('services') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                         </form>
                     </div>

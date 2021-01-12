@@ -39,7 +39,7 @@
                             @inject('cart', 'App\Classes\Cart')
                                 <div class="table-responsive">
                                     <table class="table mb-0">
-                                        <thead class="thead-dark text-center">
+                                        <thead class="table-primary text-center">
                                             <tr>
                                                 <th scope="col">{{ __("Service") }}</th>
                                                 <th scope="col">{{ __("Total Price") }}</th>
@@ -52,7 +52,7 @@
                                                     <td>{{ $product->name }}</td>
                                                     <td>{{ $cart->totalAmountForProduct($product) }}</td>
                                                     <td>
-                                                        <form method="POST" action="{{ route('product.delete', ["id" => $product->id]) }}">
+                                                        <form method="POST" action="{{ route('service.delete', ["id" => $product->id]) }}">
                                                             @method('delete')
                                                             @csrf
                                                             <button type="submit" class="alert alert-danger">

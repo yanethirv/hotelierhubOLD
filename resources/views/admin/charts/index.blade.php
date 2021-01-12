@@ -323,7 +323,7 @@
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-end">
-                                    <h4 class="mb-0">{{ __("Products Request") }}</h4>
+                                    <h4 class="mb-0">{{ __("Services Request") }}</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body px-0 pb-0">

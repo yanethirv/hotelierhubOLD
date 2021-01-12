@@ -44,7 +44,7 @@
                         </div>
                         <div class="card-footer">
                             @if(!in_array($product->id, $coursesPurchased))
-                                <form action="{{ route('product.add', ["id" => $product->id]) }}" method="POST">
+                                <form action="{{ route('service.add', ["id" => $product->id]) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-info">
                                         <i class="fa fa-cart-plus"></i> {{ __("Añadir curso") }}

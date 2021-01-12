@@ -55,6 +55,7 @@
             <section id="content-types">
                 <div class="row match-height">
                     <div class="col-xl-12  col-md-12 col-sm-12">
+                        {{ $hotel->range_rooms }}
                         <section id="basic-examples">
                             <div class="row match-height">
                                 @forelse($plans as $plan)
@@ -70,34 +71,38 @@
                                                         <hr>
                                                         <ul class="fa-ul">
                                                             <li><span class="fa-li"><i class="fa fa-check"></i></span>{{ __($plan->description) }}</li>
+                                                            
+                                                            <li><span class="fa-li"><i class="fa fa-check"></i></span>Range of Rooms: {{ __($plan->range_rooms) }}</li>
                                                         </ul>
                                                         @if(is_null($plan->document))
                                                         @else
                                                             <a class="btn btn-block btn-outline-primary float-right waves-effect waves-light mb-2" href="{{ asset($plan->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
                                                         @endif
-                                                        @if( ! auth()->user()->hasIncompletePayment('main'))
-                                                            @if(auth()->user()->subscribed('main'))
-                                                                @if(auth()->user()->subscription('main')->stripe_plan === $plan->slug)
-                                                                    <button type="button" class="btn btn-block btn-success text-uppercase">{{ __("Your current subscription") }}</button>
-                                                                @else
-                                                                    @if($priceCurrentPlan < $plan->amount)
-                                                                        <button type="submit" class="btn btn-block btn-primary text-uppercase">{{ __("Change subscription") }}</button>
+                                                            @if( ! auth()->user()->hasIncompletePayment('main'))
+                                                                @if(auth()->user()->subscribed('main'))
+                                                                    @if(auth()->user()->subscription('main')->stripe_plan === $plan->slug)
+                                                                        <button type="button" class="btn btn-block btn-success text-uppercase">{{ __("Your current subscription") }}</button>
                                                                     @else
-                                                                        <button type="button" disabled class="btn btn-block btn-outline-dark text-uppercase">{{ __("It is not possible to descend") }}</button>
+                                                                        @if($priceCurrentPlan < $plan->amount)
+                                                                            <button type="submit" class="btn btn-block btn-primary text-uppercase">{{ __("Change subscription") }}</button>
+                                                                        @else
+                                                                            <button type="button" disabled class="btn btn-block btn-outline-dark text-uppercase">{{ __("It is not possible to descend") }}</button>
+                                                                        @endif
+                                                                    @endif
+                                                                @else
+                                                                    @if ($plan->range_rooms === $hotel->range_rooms)
+                                                                        <button type="submit" class="btn btn-block btn-primary text-uppercase">{{ __("Subscribe me") }}</button>
                                                                     @endif
                                                                 @endif
                                                             @else
-                                                                <button type="submit" class="btn btn-block btn-primary text-uppercase">{{ __("Subscribe me") }}</button>
+                                                                @if(auth()->user()->subscription('main')->stripe_plan === $plan->slug)
+                                                                    <a class="btn btn-block btn-warning text-uppercase" href="{{ route('cashier.payment', auth()->user()->subscription('main')->latestPayment()->id) }}">
+                                                                        {{ __("Confirm your payment here") }}
+                                                                    </a>
+                                                                @else
+                                                                    <button type="button" disabled class="btn btn-block btn-primary text-uppercase">{{ __("Waiting...") }}</button>
+                                                                @endif
                                                             @endif
-                                                        @else
-                                                            @if(auth()->user()->subscription('main')->stripe_plan === $plan->slug)
-                                                                <a class="btn btn-block btn-warning text-uppercase" href="{{ route('cashier.payment', auth()->user()->subscription('main')->latestPayment()->id) }}">
-                                                                    {{ __("Confirm your payment here") }}
-                                                                </a>
-                                                            @else
-                                                                <button type="button" disabled class="btn btn-block btn-primary text-uppercase">{{ __("Waiting...") }}</button>
-                                                            @endif
-                                                        @endif
                                                     </div>
                                                 </form>
                                             </div>

@@ -68,6 +68,11 @@
                                 {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
                                 @error('roles') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
+                            <div class="form-group ">
+                                <label class="form-label">{{ __("Position in the Hotel") }}</label>
+                                {!! Form::select('position_id', $positions,[], array('class' => 'form-control')) !!}
+                                @error('position_id') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
                             <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                             {!! Form::close() !!}

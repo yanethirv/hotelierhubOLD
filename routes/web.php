@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::resource('user', 'Admin\UsersController');
     Route::resource('change-password','Users\PasswordController');
     Route::resource('profile','Users\ProfileController');
+    Route::resource('hotel-profile','HotelController');
     Route::resource('update-password','Users\SettingsController');
     //Mi Tarjeta
     Route::get("credit-card", 'BillingController@creditCardForm')->name("billing.credit_card_form");
@@ -59,18 +60,18 @@ Route::group(['middleware' => ['auth','verified']], function () {
     
     //Servicios-OneTime
     Route::get('/shop', 'ProductController@index')->name('shop');
-    Route::post("product/{id}/add", "ProductController@addToCart")->name("product.add");
-    Route::delete("product/{id}", "ProductController@deleteFromCart")->name("product.delete");
+    Route::post("service/{id}/add", "ProductController@addToCart")->name("service.add");
+    Route::delete("service/{id}", "ProductController@deleteFromCart")->name("service.delete");
     
     Route::group(["prefix" => "course"], function () {
         Route::get("/{id}/start", "CourseController@start")->name("course.start");
     });
 
-    Route::view('products', 'admin.products')->name("products");
-    Route::view('products-request', 'admin.products-request')->name("products-request");
+    Route::view('services', 'admin.products')->name("services");
+    Route::view('services-request', 'admin.products-request')->name("services-request");
     Route::view('suscriptions', 'admin.suscriptions')->name("suscriptions");
     Route::view('subscriptions-request', 'admin.subscriptions-request')->name("subscriptions-request");
-    Route::resource('product', 'ProductController');
+    Route::resource('service', 'ProductController');
     Route::resource('product-request', 'ProductRequestController');
     Route::resource('plan', 'PlanController');
     Route::resource('subscription-request', 'SubscriptionRequestController');
@@ -94,7 +95,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::patch("notifications/{id}", "NotificationController@read")->name("notifications.read");
     Route::delete("notifications/{id}", "NotificationController@destroy")->name("notifications.destroy");
 
-    //Products Request
+    //Services Request
     //Route::get("product-request", "ProductRequestController@index")->name("product-request.index");
 
     //Subscriptions Request

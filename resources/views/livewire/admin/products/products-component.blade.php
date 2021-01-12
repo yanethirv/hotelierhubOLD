@@ -13,8 +13,8 @@
                 <div class="action-btns">
                     <div class="btn-dropdown ">
                         <div class="btn-group dropdown actions-dropodown">
-                          <a href="{{route('product.create')}}" type="button" class="btn btn-primary mr-1 mb-1">
-                            <i class="feather icon-plus"></i>{{ __("Create Product") }}</a>
+                          <a href="{{route('service.create')}}" type="button" class="btn btn-primary mr-1 mb-1">
+                            <i class="feather icon-plus"></i>{{ __("Create Service") }}</a>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                       <td class="text-center">{{ $product->type->name }}</td>
                       <td class="text-center">{{ $product->status }}</td>
                       <td class="text-center">
-                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Product") }}"><i class="feather icon-edit"></i></a>
-                        <a href="javascript:void(0);" onclick="myFunction('{{ $product->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete product") }}<"><i class="feather icon-trash"></i></a>
+                        <a href="{{ route('service.edit',$product->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Service") }}"><i class="feather icon-edit"></i></a>
+                        <a href="javascript:void(0);" onclick="myFunction('{{ $product->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete service") }}<"><i class="feather icon-trash"></i></a>
                       </td>
                     </tr>
                   @endforeach
