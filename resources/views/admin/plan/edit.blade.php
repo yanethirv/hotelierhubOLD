@@ -64,7 +64,7 @@
                                     <label class="form-label">{{ __("Cost") }}</label>
                                     <input type="number" name="cost" class="form-control" placeholder="cost" value="{{ $suscription->cost }}" disabled>
                                 </div>
-        
+                                
                                 <div class="form-group">
                                     <label class="form-label">{{ __("Type") }}</label>
                                     <select name="type_id" class="form-control">
@@ -79,6 +79,24 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="range_rooms">{{ __("Range of Rooms") }}</label>
+                                    <div class="input-group">
+                                        <select id="range_rooms" name="range_rooms" class="form-control">
+                                            <option {{ ($suscription->range_rooms) == '0' ? 'selected' : '' }}  value="0">Choose</option>
+                                            <option {{ ($suscription->range_rooms) == '1-5' ? 'selected' : '' }}  value="1-5">1-5</option>
+                                            <option {{ ($suscription->range_rooms) == '6-10' ? 'selected' : '' }}  value="6-10">6-10</option>
+                                            <option {{ ($suscription->range_rooms) == '11-15' ? 'selected' : '' }}  value="11-15">11-15</option>
+                                            <option {{ ($suscription->range_rooms) == '16-20' ? 'selected' : '' }}  value="16-20">16-20</option>
+                                            <option {{ ($suscription->range_rooms) == '21-30' ? 'selected' : '' }}  value="21-30">21-30</option>
+                                            <option {{ ($suscription->range_rooms) == '31-40' ? 'selected' : '' }}  value="31-40">31-40</option>
+                                            <option {{ ($suscription->range_rooms) == '41-100' ? 'selected' : '' }}  value="41-100">41-100</option>
+                                          </select>
+                                    </div>
+                                    @error('range_rooms') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="description">{{ __("Status") }}</label>
                                     <div class="input-group">
@@ -101,6 +119,7 @@
                                 <div class="form-group">
                                     <label class="form-label">{{ __("Description") }}</label>
                                     <textarea class="form-control" style="height:150px" name="description" placeholder="description">{{ $suscription->description }}</textarea>
+                                    @error('description') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">{{ __("Document") }}</label><br>
@@ -111,6 +130,7 @@
                                         <br><br>
                                         <input type="file" name="document">
                                     @endif
+                                    @error('document') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
     
                                 <a href="{{ route('suscriptions') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>

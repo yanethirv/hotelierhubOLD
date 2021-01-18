@@ -106,6 +106,7 @@
                                             <option value="{{ $type->id }}">{{ $type->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('type_id') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
 
                                 <div class="form-group">

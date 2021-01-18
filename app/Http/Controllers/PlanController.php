@@ -85,6 +85,7 @@ class PlanController extends Controller
                         'description' => request('plan_description'),
                         'slug' => $plan->id,
                         'cost' => request('plan_cost'),
+                        'range_rooms' => request('range_rooms'),
                         'type_id' => request('type_id'),
                         'type_name' =>  $typeName->name,
                         'status' => request('status'),
@@ -103,6 +104,7 @@ class PlanController extends Controller
                         'description' => request('plan_description'),
                         'slug' => $plan->id,
                         'cost' => request('plan_cost'),
+                        'range_rooms' => request('range_rooms'),
                         'type_id' => request('type_id'),
                         'type_name' =>  $typeName->name,
                         'status' => request('status'),
@@ -136,29 +138,29 @@ class PlanController extends Controller
         return view('admin.plan.edit', compact('suscription', 'types'));
     }
 
+
     public function update(Request $request, $id)
     {
         $status = 'success';
         $content = __("Updated Suscription");
 
         $request->validate([
-            'type_id' => 'required',
-            'status' => 'required',
             'description' => 'required',
             'document' => 'sometimes|file|max:5000|mimes:pdf'
         ]);
 
         $suscription =  \App\Plan::findOrFail($id);
-  
+
         $typeName = Type::select('name')
                         ->where('id', '=', $request->type_id)
                         ->first();
-
+        
+        $suscription->range_rooms  = $request->range_rooms;
         $suscription->type_id  = $request->type_id;
         $suscription->type_name  = $typeName->name;
         $suscription->status  = $request->status;
         $suscription->description  = $request->description;
-        
+
         $newDocumentName = null;
 
         //check if file attached
@@ -172,7 +174,7 @@ class PlanController extends Controller
         }
 
         $suscription->save();
-
+        
         return redirect('suscriptions')->with('process_result',['status' => $status, 'content' => $content]);
     }
 

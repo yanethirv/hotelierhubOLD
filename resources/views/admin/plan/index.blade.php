@@ -68,6 +68,7 @@
                                                     <div class="card-body">
                                                         <h3 class="text-muted text-uppercase text-center mb-2">{{ __($plan->nickname) }}</h3>
                                                         <p class="text-center"><span class="font-large-2 text-center">{{ __(":amountUSD", ["amount" => $plan->amount]) }}</span><span>{{ __("/monthly") }}</span></p>
+                                                        <h3 class="text-muted text-uppercase text-center mb-2">{{ __($plan->type_name) }}</h3>
                                                         <hr>
                                                         <ul class="fa-ul">
                                                             <li><span class="fa-li"><i class="fa fa-check"></i></span>{{ __($plan->description) }}</li>

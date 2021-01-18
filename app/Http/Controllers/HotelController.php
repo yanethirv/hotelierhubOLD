@@ -19,12 +19,12 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $positions = Position::all();
+        $hotel = Hotel::where('user_id', '=', Auth::user()->id)->first();
 
-        return view('users.profile.hotel-profile',compact('user', 'positions'));
+        //dd($hotel);
+
+        return view('users.profile.hotel-profile',compact('hotel'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -52,9 +52,11 @@ class HotelController extends Controller
      * @param  \App\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function show(Hotel $hotel)
+    public function show($id)
     {
-        //
+        $hotel = Hotel::where('user_id', '=', $id)->first();
+
+        return view('livewire.admin.users.show-hotel-profile',compact('hotel'));
     }
 
     /**
@@ -75,9 +77,16 @@ class HotelController extends Controller
      * @param  \App\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hotel $hotel)
+
+    public function update(Request $request, $id)
     {
-        //
+        $status = 'success';
+        $content = __("Updated Hotel Profile");
+
+        $hotel =  Hotel::findOrFail($id);
+        $hotel->update($request->all());
+        
+        return redirect('hotel-profile')->with('process_result',['status' => $status, 'content' => $content]);
     }
 
     /**

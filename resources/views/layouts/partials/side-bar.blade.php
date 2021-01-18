@@ -47,7 +47,11 @@
                 <li class="navigation-header"><span>{{ __("User Account") }}</span></li>
                 <li {{Route::is('update-password.edit')? 'class=active':''}} class="nav-item"><a href="{{ route('update-password.edit',[Auth::user()->id]) }}"><i class="feather icon-unlock"></i><span class="menu-title">{{ __("Change Password") }}</span></a></li>
                 <li {{Route::is('profile.index')? 'class=active':''}} class="nav-item"><a href="{{ route('profile.index') }}"><i class="feather icon-user"></i><span class="menu-title">{{ __("Edit Profile") }}</span></a></li>
+
+                @role('user')
                 <li {{Route::is('hotel-profile.index')? 'class=active':''}} class="nav-item"><a href="{{ route('hotel-profile.index') }}"><i class="fa fa-building-o"></i><span class="menu-title">{{ __("Edit Hotel Profile") }}</span></a></li>
+                @endrole
+                
                 @role('super-admin|user')
                     <li {{Route::is('billing.credit_card_form')? 'class=active':''}} class="nav-item"><a href="{{ route('billing.credit_card_form') }}"><i class="fa fa-credit-card"></i><span class="menu-title">{{ __("My Card") }}</span></a></li>
                     <li {{Route::is('orders.index')? 'class=active':''}} class="nav-item"><a href="{{ route('orders.index') }}"><i class="fa fa-list"></i><span class="menu-title">{{ __("My Orders") }}</span></a></li>

@@ -49,7 +49,7 @@
                             <td class="text-center">
                               <a href="{{ route('user.show',$value->id) }}" class="btn btn-icon btn-info mt-1" title="{{ __("View Profile") }}"><i class="feather icon-search"></i></a>
                               @if ($value->type == 'client')
-                                <a href="{{ route('user.show',$value->id) }}" class="btn btn-icon btn-success mt-1" title="{{ __("View Hotel Profile") }}"><i class="feather icon-home"></i></a>  
+                                <a href="{{ route('hotel-profile.show',$value->id) }}" class="btn btn-icon btn-success mt-1" title="{{ __("View Hotel Profile") }}"><i class="feather icon-home"></i></a>  
                               @endif
                               @if (Auth::user()->id == $value->id)
                               @else

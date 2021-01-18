@@ -121,8 +121,7 @@
                                     <br><br>
                                     <input type="file" name="document">
                                 @endif
-                               
-                                
+                                @error('document') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             

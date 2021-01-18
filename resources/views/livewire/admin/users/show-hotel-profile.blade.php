@@ -1,10 +1,11 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Edit Hotel Profile") }}
+{{ __("Show Hotel Profile") }}
 @endsection
 
 @section('extra-css')
+
 @endsection
 
 @section('content')
@@ -21,7 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("Edit Hotel Profile") }}
+                                    <li class="breadcrumb-item"><a href="{{url('users')}}">{{ __("Users") }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ __("Show Hotel Profile") }}
                                     </li>
                                 </ol>
                             </div>
@@ -29,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="content-body">
                 <!-- account setting page start -->
                 <section id="page-account-settings">
@@ -158,9 +162,12 @@
                                                                 @error('property_type') <span class="text-danger">{{ $message }}</span>@enderror
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
+                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                             <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
                                                                 changes") }}</button>
+                                                        </div>-->
+                                                        <div class="col-12">
+                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -215,9 +222,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
+                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                             <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
                                                                 changes") }}</button>
+                                                        </div>-->
+                                                        <div class="col-12">
+                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -272,9 +282,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
+                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                             <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
                                                                 changes") }}</button>
+                                                        </div>-->
+                                                        <div class="col-12">
+                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -320,9 +333,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
+                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                             <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
                                                                 changes") }}</button>
+                                                        </div>-->
+                                                        <div class="col-12">
+                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -337,7 +353,12 @@
                 <!-- account setting page end -->
 
             </div>
-            </div>
+        </div>
     </div>
     <!-- END: Content-->
 @endsection
+
+@section('extra-script')
+    <script src="{{ asset('vendors/js/tables/ag-grid/ag-grid-community.min.noStyle.js') }}"></script>
+@endsection
+                
