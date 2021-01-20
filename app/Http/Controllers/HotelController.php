@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HotelController extends Controller
 {
@@ -85,8 +86,8 @@ class HotelController extends Controller
 
         $hotel =  Hotel::findOrFail($id);
         $hotel->update($request->all());
-        
-        return redirect('hotel-profile')->with('process_result',['status' => $status, 'content' => $content]);
+
+        return redirect('hotel-profile/'.$hotel->user_id)->with('process_result',['status' => $status, 'content' => $content]);
     }
 
     /**
@@ -98,5 +99,15 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         //
+    }
+
+    public function downloadProfile(string $hotel)
+    {
+        $hotel = Hotel::findOrFail($hotel);
+
+        //dd($hotelProfile);
+
+        $pdf = \PDF::loadView('admin.hotel.profile', ['hotel' => $hotel]);
+        return $pdf->download('hotel-profile.pdf');
     }
 }

@@ -64,6 +64,12 @@
                                         {{ __("Location") }}
                                     </a>
                                 </li>
+                                <br>
+                                <li class="nav-item">
+                                    <a href="{{ route("hotel-profile.downloadProfile", ["hotel" => $hotel->id]) }}" class="btn btn-warning ml-0 ml-md-1">
+                                        <i class="feather icon-download"></i> {{ __("Download Profile") }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <!-- right content section -->
@@ -98,9 +104,9 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <label for="starts">{{ __("Starts") }}</label>
-                                                                    <input type="text" class="form-control @error('starts') is-invalid @enderror" name="starts" value="{{ $hotel->starts }}" required data-validation-required-message="This field is required">
-                                                                    @error('starts') <span class="text-danger">{{ $message }}</span>@enderror
+                                                                    <label for="stars">{{ __("Stars") }}</label>
+                                                                    <input type="text" class="form-control @error('stars') is-invalid @enderror" name="stars" value="{{ $hotel->stars }}" required data-validation-required-message="This field is required">
+                                                                    @error('stars') <span class="text-danger">{{ $message }}</span>@enderror
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -162,12 +168,14 @@
                                                                 @error('property_type') <span class="text-danger">{{ $message }}</span>@enderror
                                                             </div>
                                                         </div>
-                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                            <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
-                                                                changes") }}</button>
-                                                        </div>-->
-                                                        <div class="col-12">
-                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                        <div class="col-12 d-flex flex-sm-row flex-column ">
+                                                            <div class="col-1 pb-2">
+                                                                <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                            </div>
+                                                            <div class="col-11 pb-2">
+                                                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
+                                                                    changes") }}</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -222,12 +230,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                            <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
-                                                                changes") }}</button>
-                                                        </div>-->
-                                                        <div class="col-12">
-                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                        <div class="col-12 d-flex flex-sm-row flex-column ">
+                                                            <div class="col-1 pb-2">
+                                                                <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                            </div>
+                                                            <div class="col-11 pb-2">
+                                                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
+                                                                    changes") }}</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -282,12 +292,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                            <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
-                                                                changes") }}</button>
-                                                        </div>-->
-                                                        <div class="col-12">
-                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                        <div class="col-12 d-flex flex-sm-row flex-column ">
+                                                            <div class="col-1 pb-2">
+                                                                <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                            </div>
+                                                            <div class="col-11 pb-2">
+                                                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
+                                                                    changes") }}</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -333,12 +345,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--<div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                            <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
-                                                                changes") }}</button>
-                                                        </div>-->
-                                                        <div class="col-12">
-                                                            <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                        <div class="col-12 d-flex flex-sm-row flex-column ">
+                                                            <div class="col-1 pb-2">
+                                                                <a href="{{ route('users') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                                            </div>
+                                                            <div class="col-11 pb-2">
+                                                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
+                                                                    changes") }}</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>

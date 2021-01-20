@@ -94,9 +94,9 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <label for="starts">{{ __("Starts") }}</label>
-                                                                    <input type="text" class="form-control @error('starts') is-invalid @enderror" name="starts" value="{{ $hotel->starts }}" required data-validation-required-message="This field is required">
-                                                                    @error('starts') <span class="text-danger">{{ $message }}</span>@enderror
+                                                                    <label for="stars">{{ __("Stars") }}</label>
+                                                                    <input type="text" class="form-control @error('stars') is-invalid @enderror" name="stars" value="{{ $hotel->stars }}" required data-validation-required-message="This field is required">
+                                                                    @error('stars') <span class="text-danger">{{ $message }}</span>@enderror
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">

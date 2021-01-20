@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::resource('change-password','Users\PasswordController');
     Route::resource('profile','Users\ProfileController');
     Route::resource('hotel-profile','HotelController');
+    Route::get("/hotel-profile.downloadProfile/{hotel}", "HotelController@downloadProfile")->name("hotel-profile.downloadProfile");
     Route::resource('update-password','Users\SettingsController');
     //Mi Tarjeta
     Route::get("credit-card", 'BillingController@creditCardForm')->name("billing.credit_card_form");
