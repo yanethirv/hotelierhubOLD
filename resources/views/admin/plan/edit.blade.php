@@ -85,13 +85,11 @@
                                     <div class="input-group">
                                         <select id="range_rooms" name="range_rooms" class="form-control">
                                             <option {{ ($suscription->range_rooms) == '0' ? 'selected' : '' }}  value="0">Choose</option>
-                                            <option {{ ($suscription->range_rooms) == '1-5' ? 'selected' : '' }}  value="1-5">1-5</option>
-                                            <option {{ ($suscription->range_rooms) == '6-10' ? 'selected' : '' }}  value="6-10">6-10</option>
-                                            <option {{ ($suscription->range_rooms) == '11-15' ? 'selected' : '' }}  value="11-15">11-15</option>
-                                            <option {{ ($suscription->range_rooms) == '16-20' ? 'selected' : '' }}  value="16-20">16-20</option>
-                                            <option {{ ($suscription->range_rooms) == '21-30' ? 'selected' : '' }}  value="21-30">21-30</option>
-                                            <option {{ ($suscription->range_rooms) == '31-40' ? 'selected' : '' }}  value="31-40">31-40</option>
-                                            <option {{ ($suscription->range_rooms) == '41-100' ? 'selected' : '' }}  value="41-100">41-100</option>
+                                            <option {{ ($suscription->range_rooms) == '1-74' ? 'selected' : '' }}  value="1-74">1-74</option>
+                                            <option {{ ($suscription->range_rooms) == '75-149' ? 'selected' : '' }}  value="75-149">75-149</option>
+                                            <option {{ ($suscription->range_rooms) == '150-299' ? 'selected' : '' }}  value="150-299">150-299</option>
+                                            <option {{ ($suscription->range_rooms) == '300-500' ? 'selected' : '' }}  value="300-500">300-500</option>
+                                            <option {{ ($suscription->range_rooms) == '+500' ? 'selected' : '' }}  value="+500">Over 500</option>
                                           </select>
                                     </div>
                                     @error('range_rooms') <span class="text-danger">{{ $message }}</span>@enderror
