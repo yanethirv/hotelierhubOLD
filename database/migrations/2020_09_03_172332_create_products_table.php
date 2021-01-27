@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string("name", 100)->unique();
             $table->text("description");
+            $table->string("modality", 100);
             $table->float("price")->comment("Precio del producto");
             $table->float("cost")->comment("Costo del producto");
             $table->unsignedBigInteger("type_id")->comment("Tipo de producto");

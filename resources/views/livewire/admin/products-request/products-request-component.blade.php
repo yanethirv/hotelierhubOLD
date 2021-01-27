@@ -29,7 +29,7 @@
                     <th class="text-center">{{ __("#Order") }}</th>
                     <th class="text-center">{{ __("Invoice ID") }}</th>
                     <th class="text-center">{{ __("Hostname") }}</th>
-                    <th class="text-center">{{ __("Product") }}</th>
+                    <th class="text-center">{{ __("Service") }}</th>
                     <th class="text-center">{{ __("Status") }}</th>
                     <th class="text-center">{{ __("Actions") }}</th>
                   </tr>
@@ -53,9 +53,6 @@
                         @endif
                         @if ($orderLine->status === 'inactive')
                           <td class="text-center"><i class="fa fa-circle font-small-3 text-danger mr-50"></i> {{ __("Inactive") }}</td>
-                        @endif
-                        @if ($orderLine->status === 'review')
-                          <td class="text-center"><i class="fa fa-circle font-small-3 text-info mr-50"></i> {{ __("On Review") }}</td>
                         @endif
                       <td class="text-center">
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
@@ -98,12 +95,6 @@
                                                       selected
                                                   @endif
                                                   >{{ __("In Process") }}</option>
-
-                                                  <option value="review"
-                                                  @if ($orderLine->status === 'review')
-                                                      selected
-                                                  @endif
-                                                  >{{ __("On Review") }}</option>
 
                                                   <option value="wait"
                                                   @if ($orderLine->status === 'wait')

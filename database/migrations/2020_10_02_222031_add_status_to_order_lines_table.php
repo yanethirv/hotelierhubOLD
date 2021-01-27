@@ -14,7 +14,7 @@ class AddStatusToOrderLinesTable extends Migration
     public function up()
     {
         Schema::table('order_lines', function (Blueprint $table) {
-            $table->enum('status', ['active', 'inactive', 'process', 'review', 'wait'])->default('wait');
+            $table->enum('status', ['active', 'inactive', 'process', 'wait'])->default('wait');
         });
     }
 

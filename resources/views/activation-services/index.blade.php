@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __('Payment Services') }}
+{{ __('Activation Services') }}
 @endsection
 
 @section('extra-css')
@@ -24,7 +24,7 @@
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">{{ __('Dashboard') }}</a>
                                 </li>
                                 </li>
-                                <li class="breadcrumb-item active">{{ __('Payment Services') }}
+                                <li class="breadcrumb-item active">{{ __('Activation Services') }}
                                 </li>
                             </ol>
                         </div>
@@ -36,14 +36,14 @@
         <div class="content-body">
             <section id="content-types">
                 <div class="row match-height">
-                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-12">
+                    <div class="col-12">
                         <section id="basic-examples">
                             @foreach ($types as $type)
                             <h2 class="text-primary my-2">{{ $type->name }}</h2>
                                 <div class="row match-height">
                                     @foreach ($products as $product)
                                         @if ($product->type_id == $type->id)
-                                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                                                 <div class="card">
                                                     <div class="card-content">
                                                         <div class="card-body">
@@ -51,28 +51,39 @@
                                                             <h5 class="my-1">{{ $product->name }}</h5>
                                                             <p class="card-text  mb-0">{{ $product->description }}</p>
                                                             <br>
-                                                            <div class="d-flex justify-content-between mt-2">
-                                                                <small class="float-left font-weight-bold mb-25" id="example-caption-1"></small>
-                                                                <p class="float-left font-weight-bold mb-25" id="example-caption-2">{{ __("Price") }}: {{ format_currency_helper($product->price) }}</p>
-                                                            </div>
                                                             <hr class="my-1">
                                                             <div class="card-btns d-flex justify-content-between">
-                                                                @if(!in_array($product->id, $coursesPurchased))
-                                                                    <form action="{{ route('service.add', ["id" => $product->id]) }}" method="POST">
+                                                                @if(!in_array($product->id, $activationServices))
+                                                                <form action="{{ route('activation.store') }}" method="POST">
                                                                     @csrf
-                                                                        <button type="submit" class="btn btn-primary">
-                                                                            <i class="fa fa-cart-plus"></i> {{ __("Buy Service") }}
-                                                                        </button>
-                                                                    </form>
+                                                                    <input type="hidden" name="product_id" class="form-control" value="{{ $product->id }}">
+                                                                    <input type="hidden" name="product_name" class="form-control" value="{{ $product->name }}">
+                                                                    <input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}">
+                                                                    <input type="hidden" name="hostname" class="form-control" value="{{ Auth::user()->hostname }}">
+                                                                    <input type="hidden" name="status" class="form-control" value="wait">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        <i class="fa fa-plus"></i> {{ __("Request Activation") }}
+                                                                    </button>
+                                                                </form>
                                                                 @else
-                                                                    <button class="btn gradient-light-info" disabled>{{ __("Purchased") }}</button>
+                                                                    <button class="btn gradient-light-info" disabled>{{ __("Requested Service") }}</button>
                                                                 @endif      
                                                                 @if(is_null($product->document))
 
                                                                 @else
-                                                                        
                                                                 <a class="btn btn-outline-primary float-right waves-effect waves-light" href="{{ asset($product->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Info") }}</a>
                                                                 @endif
+                                                            </div>
+                                                            <div class="card-btns d-flex justify-content-between">
+                                                                <form action="{{ route('activation.store') }}" method="POST">
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <input type="hidden" name="product_id" class="form-control" value="{{ $product->id }}">
+                                                                        <input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}">
+                                                                        <input type="hidden" name="status" class="form-control" value="review">
+                                                                    </div>
+        
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -84,10 +95,6 @@
                                 <hr>
                             @endforeach
                         </section>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12">
-                        <h2 class="text-primary my-2">Shopping Cart</h2>
-                        @include('shop.sidebar')
                     </div>
                 </div>
             </section>

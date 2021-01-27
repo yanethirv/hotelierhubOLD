@@ -44,7 +44,17 @@
                                 <label class="form-label">{{ __("Name") }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $product->name }}">
                             </div>
-         
+                            <div class="form-group">
+                                <label for="range_rooms">{{ __("Modality") }}</label>
+                                <div class="input-group">
+                                    <select id="modality" name="modality" class="form-control">
+                                        <option {{ ($product->modality) == '' ? 'selected' : '' }}  value="0">Choose</option>
+                                        <option {{ ($product->modality) == 'activation' ? 'selected' : '' }}  value="activation">Activation</option>
+                                        <option {{ ($product->modality) == 'payment' ? 'selected' : '' }}  value="payment">Payment</option>
+                                      </select>
+                                </div>
+                                @error('modality') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Price") }}</label>
                                 <input type="number" name="price" class="form-control" placeholder="price" value="{{ $product->price }}">

@@ -6,6 +6,7 @@ use DB;
 use App\User;
 use App\Order;
 use App\OrderLine;
+use App\Activation;
 use App\Subscription;
 use App\ProductRequest;
 use App\SubscriptionRequest;
@@ -193,15 +194,28 @@ class HomeController extends Controller
             ]
         ]);
 
-        //TOTAL Services Request ACTIVE
+        //TOTAL Activation Services Request ACTIVE
+        $activationsRequestActive = Activation::where('status', '=', 'active')->count();
+        //TOTAL Activation Services Request INACTIVE
+        $activationsRequestInactive = Activation::where('status', '=', 'inactive')->count();
+        //TOTAL Activation Services Request PROCESS
+        $activationsRequestProcess = Activation::where('status', '=', 'process')->count();
+        //TOTAL Activation Services Request WAIT
+        $activationsRequestWait = Activation::where('status', '=', 'wait')->count();
+
+        //TOTAL Payment Services Request ACTIVE
         $productsRequestActive = OrderLine::where('status', '=', 'active')->count();
-        //TOTAL Services Request PROCESS
+        //TOTAL Payment Services Request INACTIVE
+        $productsRequestInactive = OrderLine::where('status', '=', 'inactive')->count();
+        //TOTAL Payment Services Request PROCESS
         $productsRequestProcess = OrderLine::where('status', '=', 'process')->count();
-        //TOTAL Services Request WAIT
+        //TOTAL Payment Services Request WAIT
         $productsRequestWait = OrderLine::where('status', '=', 'wait')->count();
 
         //TOTAL SUBSCRIPTIONS REQUEST ACTIVE
         $subscriptionsRequestActive = Subscription::where('status', '=', 'active')->where('stripe_status', '=', 'complete')->count();
+        //TOTAL SUBSCRIPTIONS REQUEST ACTIVE
+        $subscriptionsRequestInactive = Subscription::where('status', '=', 'inactive')->where('stripe_status', '=', 'complete')->count();
         //TOTAL SUBSCRIPTIONS REQUEST PROCESS
         $subscriptionsRequestProcess = Subscription::where('status', '=', 'process')->where('stripe_status', '=', 'complete')->count();
         //TOTAL SUBSCRIPTIONS REQUEST WAIT
@@ -230,6 +244,8 @@ class HomeController extends Controller
         ->setStroke(1);
 
         $userProductsRequest = ProductRequest::where('user_id', '=', auth()->id())->get();
+
+        $userActivationsRequest = Activation::where('user_id', '=', auth()->id())->get();
 
         $userSubscriptionsRequest = SubscriptionRequest::where('user_id', '=', auth()->id())->get();
 
@@ -262,9 +278,10 @@ class HomeController extends Controller
 
         return view('home', compact('usersStatus', 'usersActives', 'usersInactives', 'clientsTotal', 
                                                 'usersPerMonth', 'totalAmountSubscriptions', 'amountPerMonthSubscriptions',
-                                                'totalAmountProducts', 'totalOrders', 'amountPerMonthProducts', 'productsRequestActive',
-                                                'productsRequestProcess', 'productsRequestWait', 'subscriptionsRequestActive',
-                                                'subscriptionsRequestProcess', 'subscriptionsRequestWait', 'nuevo', 'userProductsRequest', 'userSubscriptionsRequest',
-                                                'requestPerMonthProducts'));
+                                                'totalAmountProducts', 'totalOrders', 'amountPerMonthProducts', 'activationsRequestActive', 'productsRequestActive',
+                                                'activationsRequestInactive', 'productsRequestInactive', 'activationsRequestProcess','productsRequestProcess', 
+                                                'activationsRequestWait', 'productsRequestWait', 'subscriptionsRequestActive', 'subscriptionsRequestInactive',
+                                                'subscriptionsRequestProcess', 'subscriptionsRequestWait', 'nuevo', 'userActivationsRequest', 'userProductsRequest', 
+                                                'userSubscriptionsRequest', 'requestPerMonthProducts'));
     }
 }

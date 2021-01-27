@@ -26,32 +26,29 @@
                 <thead>
                   <tr>
                     <th class="text-center">{{ __("ID") }}</th>
-                    <th class="text-center">{{ __("Invoice ID") }}</th>
+                    <th class="text-center">{{ __("Service") }}</th>
                     <th class="text-center">{{ __("Hostname") }}</th>
-                    <th class="text-center">{{ __("Product") }}</th>
                     <th class="text-center">{{ __("Status") }}</th>
                     <th class="text-center">{{ __("Actions") }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($subscriptions as $subscrition)
+                  @foreach ($activationServices as $activationService)
                     <tr>
-                      <td class="text-center">{{ $subscrition->id }}</td>
-                      <td class="text-center">{{ $subscrition->stripe_id }}</td>
-                      <td class="text-center">{{ $subscrition->user->hostname }}</td>
-                      <td class="text-center">{{ $subscrition->stripe_plan }}</td>
-                      @if ($subscrition->status === 'wait')
-                          <i class="fa fa-circle font-small-3 text-warning mr-50"></i>
-                          <td class="text-center">{{ __("On Wait") }}</td>
+                      <td class="text-center">{{ $activationService->id }}</td>
+                      <td class="text-center">{{ $activationService->product->name }}</td>
+                      <td class="text-center">{{ $activationService->user->hostname }}</td>
+                        @if ($activationService->status === 'wait')
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-warning mr-50"></i> {{ __("On Wait") }}</td>
                         @endif
-                        @if ($subscrition->status === 'process')
-                          <td class="text-center">{{ __("In Process") }}</td>
+                        @if ($activationService->status === 'process')
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-primary mr-50"></i> {{ __("In Process") }}</td>
                         @endif
-                        @if ($subscrition->status === 'active')
-                          <td class="text-center">{{ __("Active") }}</td>
+                        @if ($activationService->status === 'active')
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-success mr-50"></i> {{ __("Active") }}</td>
                         @endif
-                        @if ($subscrition->status === 'inactive')
-                          <td class="text-center">{{ __("Inactive") }}</td>
+                        @if ($activationService->status === 'inactive')
+                          <td class="text-center"><i class="fa fa-circle font-small-3 text-danger mr-50"></i> {{ __("Inactive") }}</td>
                         @endif
                       <td class="text-center">
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
@@ -67,36 +64,33 @@
                                         </button>
                                     </div>
                                     <div class="modal-body text-left">
-                                      <form action="{{ route('subscription-request.store') }}" method="POST">
+                                      <form action="{{ route('activation.update',$activationService->id) }}" method="POST">
                                         @csrf
-                                        <div class="form-group">
-                                            <input type="hidden" name="subscription_id" class="form-control" value="{{ $subscrition->id }}">
-                                            <input type="hidden" name="user_id" class="form-control" value="{{ $subscrition->user_id }}">
-                                        </div>
+                                        <input name="_method" type="hidden" value="PUT">
                                         <div class="form-group">
                                           <label for="description">{{ __("Status") }}</label>
                                           <div class="input-group">
                                               <select class="form-control" name="status">
                                                   <option value="active"
-                                                  @if ($subscrition->status === 'active')
+                                                  @if ($activationService->status === 'active')
                                                       selected
                                                   @endif
                                                   >{{ __("Active") }}</option>
           
                                                   <option value="inactive"
-                                                  @if ($subscrition->status === 'inactive')
+                                                  @if ($activationService->status === 'inactive')
                                                       selected
                                                   @endif
                                                   >{{ __("Inactive") }}</option>
 
                                                   <option value="process"
-                                                  @if ($subscrition->status === 'process')
+                                                  @if ($activationService->status === 'process')
                                                       selected
                                                   @endif
                                                   >{{ __("In Process") }}</option>
 
                                                   <option value="wait"
-                                                  @if ($subscrition->status === 'wait')
+                                                  @if ($activationService->status === 'wait')
                                                       selected
                                                   @endif
                                                   >{{ __("On Wait") }}</option>
@@ -111,7 +105,7 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="{{ route('subscriptions-request') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
+                                        <a href="{{ route('activations-request') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                                         <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                                     </form>
                                     </div>
@@ -123,7 +117,7 @@
                   @endforeach
                 </tbody>
               </table>
-              {{ $subscriptions->links() }}
+              {{ $activationServices->links() }}
             </div>
           </div>
         </div>
@@ -132,7 +126,7 @@
   </div>
   </div>
   @elseif($action == 2)
-  @include('livewire.admin.products.products-form')
+  @include('livewire.admin.activations.activations-form')
   @endif
   <script type="text/javascript">
   function myFunction(id)

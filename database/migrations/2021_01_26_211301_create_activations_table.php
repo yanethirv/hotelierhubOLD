@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductRequestsTable extends Migration
+class CreateActivationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateProductRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_requests', function (Blueprint $table) {
+        Schema::create('activations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_line_id');
-            $table->foreign("order_line_id")->references("id")->on("order_lines");
+            $table->unsignedBigInteger('product_id');
+            $table->string("product_name", 100);
+            $table->foreign("product_id")->references("id")->on("products");
             $table->unsignedBigInteger('user_id');
+            $table->string("hostname", 100);
             $table->foreign("user_id")->references("id")->on("users");
             $table->enum('status', ['process', 'active', 'inactive','wait']);
+            $table->text("comment")->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateProductRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_requests');
+        Schema::dropIfExists('activations');
     }
 }

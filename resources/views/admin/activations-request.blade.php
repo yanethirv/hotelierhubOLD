@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Payment Services Request") }}
+{{ __("Activation Services Request") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="">{{ __("Payment Services Request") }}</a>
+                                    <li class="breadcrumb-item"><a href="">{{ __("Activation Services Request") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("List Payment Services Request") }}
+                                    <li class="breadcrumb-item active">{{ __("List Activation Services Request") }}
                                     </li>
                                 </ol>
                             </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            @livewire('admin.products-request-component')
+            @livewire('admin.activations-request-component')
         </div>
     </div>
     <!-- END: Content-->

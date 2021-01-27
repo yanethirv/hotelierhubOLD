@@ -21,4 +21,9 @@ class Product extends Model
     public function type() {
         return $this->belongsTo(Type::class);
     }
+
+    public function activations(){
+        return $this->hasMany(Activation::class);
+    }
 }
+

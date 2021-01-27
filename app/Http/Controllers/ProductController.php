@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Cart;
-use App\Product;
 use App\Type;
+use App\Product;
+use App\Activation;
+use App\Classes\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::where('status','active')->paginate(25);
+        $products = Product::where('status','active')
+                            ->where('modality','payment')
+                            ->paginate(25);
         $coursesPurchased = [];
         if (auth()->check()) {
             $coursesPurchased = auth()->user()->coursesPurchased();
@@ -60,6 +64,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100',
+            'modality' => 'required|string',
             'price' => 'required|numeric',
             'cost' => 'required|numeric',
             'type_id' => 'required',
@@ -69,7 +74,7 @@ class ProductController extends Controller
         ]);
 
         $status = 'success';
-        $content = 'Product Created!';
+        $content = 'Service Created!';
 
         $newDocumentName = null;
 
@@ -85,6 +90,7 @@ class ProductController extends Controller
     
             $product = new Product([
                 'name' => $request->get('name'),
+                'modality' => $request->get('modality'),
                 'price' => $request->get('price'),
                 'cost' => $request->get('cost'),
                 'type_id' => $request->get('type_id'),
@@ -101,6 +107,7 @@ class ProductController extends Controller
     
             $product = new Product([
                 'name' => $request->get('name'),
+                'modality' => $request->get('modality'),
                 'price' => $request->get('price'),
                 'cost' => $request->get('cost'),
                 'type_id' => $request->get('type_id'),
@@ -130,6 +137,7 @@ class ProductController extends Controller
 
         $request->validate([
             'name' => 'required|string',
+            'modality' => 'required|string',
             'price' => 'required|numeric',
             'cost' => 'required|numeric',
             'type_id' => 'required',
@@ -145,6 +153,7 @@ class ProductController extends Controller
                         ->first();
         
         $product->name  = $request->name;
+        $product->modality  = $request->modality;
         $product->price  = $request->price;
         $product->cost  = $request->cost;
         $product->type_id  = $request->type_id;

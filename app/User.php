@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'mobile', 'avatar', 'hostname', 'password', 'status', 'type', 'position_id'
+        'name', 'surname', 'email', 'mobile', 'avatar', 'hostname', 'password', 'status', 'type', 'position_id', 'email_verified_at',
     ];
 
     /**
@@ -62,6 +62,24 @@ class User extends Authenticatable implements MustVerifyEmail
         return $productIds;
     }
 
+    public function activationServices() {
+        $activations = $this
+            ->activations()
+            ->where("status", "wait")
+            ->orWhere("status", "review")
+            ->orWhere("status", "process")
+            ->orWhere("status", "active")
+            ->orWhere("status", "inactive")
+            ->get();
+        $activationsIds = [];
+        if ($activations->count()) {
+            foreach ($activations as $activation) {
+                array_push($activationsIds, $activation->product_id);
+            }
+        }
+        return $activationsIds;
+    }
+
     public function gcCaptures(){
         return $this->hasMany('App\Capturegc');
     }
@@ -76,5 +94,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hotel(){
         return $this->hasOne(Hotel::class);
+    }
+
+    public function activations() {
+        return $this->hasMany(Activation::class);
     }
 }

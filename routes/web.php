@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/shop', 'ProductController@index')->name('shop');
     Route::post("service/{id}/add", "ProductController@addToCart")->name("service.add");
     Route::delete("service/{id}", "ProductController@deleteFromCart")->name("service.delete");
+
+    //Servicios de Activación
+    Route::get('/activation-services', 'ActivationController@index')->name('activation-services');
     
     Route::group(["prefix" => "course"], function () {
         Route::get("/{id}/start", "CourseController@start")->name("course.start");
@@ -70,9 +73,11 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     Route::view('services', 'admin.products')->name("services");
     Route::view('services-request', 'admin.products-request')->name("services-request");
+    Route::view('activations-request', 'admin.activations-request')->name("activations-request");
     Route::view('suscriptions', 'admin.suscriptions')->name("suscriptions");
     Route::view('subscriptions-request', 'admin.subscriptions-request')->name("subscriptions-request");
     Route::resource('service', 'ProductController');
+    Route::resource('activation', 'ActivationController');
     Route::resource('product-request', 'ProductRequestController');
     Route::resource('plan', 'PlanController');
     Route::resource('subscription-request', 'SubscriptionRequestController');

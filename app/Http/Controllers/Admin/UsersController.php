@@ -117,6 +117,7 @@ class UsersController extends Controller
             $content = 'User Created!';
 
             $input = $request->all();
+            $input['email_verified_at'] = now(); //Carbon instance
 
             //dd($request->roles);
 

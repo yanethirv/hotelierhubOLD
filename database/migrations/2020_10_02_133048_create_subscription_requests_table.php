@@ -19,7 +19,7 @@ class CreateSubscriptionRequestsTable extends Migration
             $table->foreign("subscription_id")->references("id")->on("subscriptions");
             $table->unsignedBigInteger('user_id');
             $table->foreign("user_id")->references("id")->on("users");
-            $table->enum('status', ['process', 'active', 'inactive','review']);
+            $table->enum('status', ['process', 'active', 'inactive','wait']);
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Create Service") }}
+{{ __("Create Product Request") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Services") }}</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('services') }}">{{ __("Products") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("Create Services") }}
+                                    <li class="breadcrumb-item active">{{ __("Create Product Request") }}
                                     </li>
                                 </ol>
                             </div>
@@ -37,43 +37,24 @@
                 <div class="col-lg-7 mx-auto">
                     <div class="bg-white rounded-lg shadow-sm p-5">
                         <h3 class="mb-4 text-center">{{ __("Create Product") }}</h3>
-                        <form action="{{ route('service.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <form action="{{ route('service.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name" value="{{
-                                    old('name') ? old('name') : ""
-                                }}">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">{{ __("Modality") }}</label>
-                                <div class="input-group">
-                                    <select class="form-control" name="modality">
-                                        <option>Choose</option>
-                                        <option value="activation">Activation</option>
-                                        <option value="payment">Payment</option>
-                                    </select>
-                                </div>
-                                @error('modality') <span class="text-danger">{{ $message }}</span>@enderror
+                                <input type="text" name="name" class="form-control" placeholder="Name">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Price") }}</label>
-                                <input type="number" name="price" class="form-control" placeholder="price" value="{{
-                                    old('price') ? old('price') : ""
-                                }}">
+                                <input type="number" name="price" class="form-control" placeholder="price">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Cost") }}</label>
-                                <input type="number" name="cost" class="form-control" placeholder="cost" value="{{
-                                    old('cost') ? old('cost') : ""
-                                }}">
+                                <input type="number" name="cost" class="form-control" placeholder="cost">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Type") }}</label>
                                 <select name="type_id" class="form-control">
-                                    @foreach ($types as $type)
-                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                    @endforeach
+                                    <option value=""></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -89,12 +70,6 @@
                             <div class="form-group">
                                 <label class="form-label">{{ __("Description") }}</label>
                                 <textarea class="form-control" style="height:150px" name="description" placeholder="description"></textarea>
-                                @error('description') <span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">{{ __("Document") }}</label><br>
-                                <input type="file" name="document">
-                                @error('document') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <a href="{{ route('services') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
