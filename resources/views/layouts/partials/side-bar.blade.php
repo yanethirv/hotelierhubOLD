@@ -69,8 +69,8 @@
                             <li {{Route::is('services-recurring.index')? 'class=active':''}} class="is-shown"><a href="{{ route('services-recurring.index') }}"><i class="feather icon-circle"></i><span class="menu-title">{{ __("Recurring") }}</span></a></li>
                         </ul>
                     </li>--}}
-                    <li {{Route::is('activation-services')? 'class=active':''}} class="nav-item"><a href="{{ route('activation-services') }}"><i class="fa fa-tag"></i><span class="menu-title">{{ __("Activation Services") }}</span></a></li>
-                    <li {{Route::is('shop')? 'class=active':''}} class="nav-item"><a href="{{ route('shop') }}"><i class="fa fa-tags"></i><span class="menu-title">{{ __("Payment Services") }}</span></a></li>
+                    <li {{Route::is('activation-services')? 'class=active':''}} class="nav-item"><a href="{{ route('activation-services') }}"><i class="fa fa-tag"></i><span class="menu-title">{{ __("Request a Activation") }}</span></a></li>
+                    <li {{Route::is('shop')? 'class=active':''}} class="nav-item"><a href="{{ route('shop') }}"><i class="fa fa-tags"></i><span class="menu-title">{{ __("Services-Buy Now") }}</span></a></li>
                     <li {{Route::is('plans.index')? 'class=active':''}} class="nav-item"><a href="{{ route('plans.index') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions") }}</span></a></li>
                 @endrole
 

@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __('Activation Services') }}
+{{ __('Request a Activation') }}
 @endsection
 
 @section('extra-css')
@@ -24,7 +24,7 @@
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">{{ __('Dashboard') }}</a>
                                 </li>
                                 </li>
-                                <li class="breadcrumb-item active">{{ __('Activation Services') }}
+                                <li class="breadcrumb-item active">{{ __('Request a Activation') }}
                                 </li>
                             </ol>
                         </div>
