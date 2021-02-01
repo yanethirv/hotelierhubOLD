@@ -149,18 +149,20 @@
                                                                     <select id="property_type" name="property_type" class="form-control">
                                                                         <option {{ ($hotel->property_type) == '0' ? 'selected' : '' }}  value="0">Choose</option>
                                                                         <option {{ ($hotel->property_type) == 'Apartments' ? 'selected' : '' }}  value="Apartments">Apartments</option>
+                                                                        <option {{ ($hotel->property_type) == 'Bead and Breaksfast' ? 'selected' : '' }}  value="Bead and Breaksfast">Bead and Breaksfast</option>
                                                                         <option {{ ($hotel->property_type) == 'Boutique' ? 'selected' : '' }}  value="Boutique">Boutique</option>
                                                                         <option {{ ($hotel->property_type) == 'Bungalows' ? 'selected' : '' }}  value="Bungalows">Bungalows</option>
-                                                                        <option {{ ($hotel->property_type) == 'Chalet' ? 'selected' : '' }}  value="Chalet">Chalet</option>
                                                                         <option {{ ($hotel->property_type) == 'Condo Hotel' ? 'selected' : '' }}  value="Condo Hotel">Condo Hotel</option>
                                                                         <option {{ ($hotel->property_type) == 'Glamping' ? 'selected' : '' }}  value="Glamping">Glamping</option>
                                                                         <option {{ ($hotel->property_type) == 'Guesthouse' ? 'selected' : '' }}  value="Guesthouse">Guesthouse</option>
                                                                         <option {{ ($hotel->property_type) == 'Hostal' ? 'selected' : '' }}  value="Hostal">Hostal</option>
+                                                                        <option {{ ($hotel->property_type) == 'Hostel' ? 'selected' : '' }}  value="Hostel">Hostel</option>
                                                                         <option {{ ($hotel->property_type) == 'Hotel' ? 'selected' : '' }}  value="Hotel">Hotel</option>
                                                                         <option {{ ($hotel->property_type) == 'Motel' ? 'selected' : '' }}  value="Motel">Motel</option>
                                                                         <option {{ ($hotel->property_type) == 'Lodge' ? 'selected' : '' }}  value="Lodge">Lodge</option>
                                                                         <option {{ ($hotel->property_type) == 'Resort' ? 'selected' : '' }}  value="Resort">Resort</option>
                                                                         <option {{ ($hotel->property_type) == 'Vacation Rentals' ? 'selected' : '' }}  value="Vacation Rentals">Vacation Rentals</option>
+                                                                        <option {{ ($hotel->property_type) == 'Villa' ? 'selected' : '' }}  value="Villa">Villa</option>
                                                                     </select>
                                                                 </div>
                                                                 @error('property_type') <span class="text-danger">{{ $message }}</span>@enderror

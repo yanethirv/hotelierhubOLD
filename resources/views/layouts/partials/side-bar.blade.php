@@ -24,12 +24,15 @@
                     <li class="{{ (request()->is('permissions')) ? 'active' : '' }}"><a href="{{url('permissions')}}"><i class="feather icon-lock"></i><span class="menu-title">{{ __("Permissions") }}</span></a></li>
                 @endrole
 
-                @role('super-admin|admin')
+                @role('super-admin')
                     <li {{Route::is('role.edit')? 'class=active':''}} class="{{ (request()->is('roles')) ? 'active' : '' }}"><a href="{{url('roles')}}"><i class="feather icon-settings"></i><span class="menu-title">{{ __("Roles") }}</span></a></li>
-                    <li {{Route::is('users.edit')? 'class=active':''}} class="{{ (request()->is('users')) ? 'active' : '' }}"><a href="{{url('users')}}"><i class="feather icon-users"></i><span class="menu-title">{{ __("Users") }}</span></a>
                 @endrole
 
                 @role('super-admin|admin')
+                    <li {{Route::is('users.edit')? 'class=active':''}} class="{{ (request()->is('users')) ? 'active' : '' }}"><a href="{{url('users')}}"><i class="feather icon-users"></i><span class="menu-title">{{ __("Users") }}</span></a>
+                @endrole
+
+                @role('super-admin')
                     <li class="navigation-header"><span>{{ __("Marketplace Management") }}</span></li>
                     {{--  <li {{Route::is('plans.create')? 'class=active':''}} class=" nav-item"><a href="{{ route('plans.create') }}"><i class="feather icon-plus"></i><span class="menu-title">Crear Plan</span></a></li>--}}
                     <li class="{{ (request()->is('types')) ? 'active' : '' }}"><a href="{{url('types')}}"><i class="fa fa-tag"></i><span class="menu-title">{{ __("Types") }}</span></a></li>
@@ -37,12 +40,11 @@
                     <li class="{{ (request()->is('suscriptions')) ? 'active' : '' }}"><a href="{{ route('suscriptions') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions") }}</span></a></li>
                 @endrole
 
-                @role('super-admin|admin')
+                @role('super-admin|admin|supplier')
                     <li class="navigation-header"><span>{{ __("Requests Management") }}</span></li>
 
                     <li class="{{ (request()->is('activations-request')) ? 'active' : '' }}"><a href="{{ route('activations-request') }}"><i class="fa fa-tag"></i><span class="menu-title">{{ __("Activation Services Request") }}</span></a></li>
                     <li class="{{ (request()->is('services-request')) ? 'active' : '' }}"><a href="{{ route('services-request') }}"><i class="fa fa-tags"></i><span class="menu-title">{{ __("Payment Services Request") }}</span></a></li>
-
                     <li class="{{ (request()->is('subscriptions-request')) ? 'active' : '' }}"><a href="{{ route('subscriptions-request') }}"><i class="fa fa-diamond"></i><span class="menu-title">{{ __("Subscriptions Request") }}</span></a></li>
                 @endrole
 
