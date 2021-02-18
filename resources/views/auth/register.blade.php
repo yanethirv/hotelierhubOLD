@@ -31,6 +31,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/pages/authentication.css') }}">
     <!-- END: Page CSS-->
+
+    {!! NoCaptcha::renderJs() !!}
 </head>
 <!-- END: Head-->
 
@@ -129,7 +131,17 @@
                                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password">
                                                         <label for="password-confirm">{{ __('Confirm Password') }}</label>
                                                     </div>
-                                                    <div class="g-recaptcha" data-sitekey="6LfRQycaAAAAACVh9Qn4udEwS6kZVNW-8skgs7Z1"></div>
+                                                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                                        <div class="col-md-6">
+                                                            {!! app('captcha')->display() !!}
+                                                            @if ($errors->has('g-recaptcha-response'))
+                                                                <div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
+                                                                    <i class="feather icon-info mr-1 align-middle"></i>
+                                                                    <span>{{ $errors->first('g-recaptcha-response') }}</span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group row">
                                                         <div class="col-12">
                                                             <fieldset class="checkbox">

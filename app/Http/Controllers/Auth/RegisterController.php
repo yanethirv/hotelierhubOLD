@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'mobile' => ['required', 'numeric'],
             'hostname' => ['required', 'string', 'max:20', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => ['required','captcha'],
         ]);
     }
 
