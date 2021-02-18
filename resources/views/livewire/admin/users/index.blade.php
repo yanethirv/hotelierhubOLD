@@ -40,24 +40,47 @@
                       </thead>
                       <tbody>
                         @foreach($users as $value)
-                          <tr>
-                            <td class="text-center">{{ $value->id }}</td>
-                            <td class="text-center">{{ $value->name }} {{ $value->surname }}</td>
-                            <td class="text-center">{{ $value->email }}</td>
-                            <td class="text-center">{{ $value->type }}</td>
-                            <td class="text-center">{{ $value->status }}</td>
-                            <td class="text-center">
-                              <a href="{{ route('user.show',$value->id) }}" class="btn btn-icon btn-info mt-1" title="{{ __("View Profile") }}"><i class="feather icon-search"></i></a>
-                              @if ($value->type == 'client')
-                                <a href="{{ route('hotel-profile.show',$value->id) }}" class="btn btn-icon btn-success mt-1" title="{{ __("View Hotel Profile") }}"><i class="feather icon-home"></i></a>  
-                              @endif
-                              @if (Auth::user()->id == $value->id)
-                              @else
-                                <a href="{{ route('user.edit',$value->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit User") }}"><i class="feather icon-edit"></i></a>
-                                <a href="javascript:void(0);" onclick="myFunction('{{ $value->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete User") }}"><i class="feather icon-trash"></i></a>
-                              @endif
-                            </td>
-                          </tr>
+                          @if (Auth::user()->name == 'Super' || Auth::user()->name == 'Admin' )
+                            <tr>
+                              <td class="text-center">{{ $value->id }}</td>
+                              <td class="text-center">{{ $value->name }} {{ $value->surname }}</td>
+                              <td class="text-center">{{ $value->email }}</td>
+                              <td class="text-center">{{ $value->type }}</td>
+                              <td class="text-center">{{ $value->status }}</td>
+                              <td class="text-center">
+                                <a href="{{ route('user.show',$value->id) }}" class="btn btn-icon btn-info mt-1" title="{{ __("View Profile") }}"><i class="feather icon-search"></i></a>
+                                @if ($value->type == 'client')
+                                  <a href="{{ route('hotel-profile.show',$value->id) }}" class="btn btn-icon btn-success mt-1" title="{{ __("View Hotel Profile") }}"><i class="feather icon-home"></i></a>  
+                                @endif
+                                @if (Auth::user()->id == $value->id)
+                                @else
+                                  <a href="{{ route('user.edit',$value->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit User") }}"><i class="feather icon-edit"></i></a>
+                                  <a href="javascript:void(0);" onclick="myFunction('{{ $value->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete User") }}"><i class="feather icon-trash"></i></a>
+                                @endif
+                              </td>
+                            </tr>
+                          @else
+                            @if (Auth::user()->country == $value->country)
+                            <tr>
+                              <td class="text-center">{{ $value->id }}</td>
+                              <td class="text-center">{{ $value->name }} {{ $value->surname }}</td>
+                              <td class="text-center">{{ $value->email }}</td>
+                              <td class="text-center">{{ $value->type }}</td>
+                              <td class="text-center">{{ $value->status }}</td>
+                              <td class="text-center">
+                                <a href="{{ route('user.show',$value->id) }}" class="btn btn-icon btn-info mt-1" title="{{ __("View Profile") }}"><i class="feather icon-search"></i></a>
+                                @if ($value->type == 'client')
+                                  <a href="{{ route('hotel-profile.show',$value->id) }}" class="btn btn-icon btn-success mt-1" title="{{ __("View Hotel Profile") }}"><i class="feather icon-home"></i></a>  
+                                @endif
+                                @if (Auth::user()->id == $value->id)
+                                @else
+                                  <a href="{{ route('user.edit',$value->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit User") }}"><i class="feather icon-edit"></i></a>
+                                  <a href="javascript:void(0);" onclick="myFunction('{{ $value->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete User") }}"><i class="feather icon-trash"></i></a>
+                                @endif
+                              </td>
+                            </tr>
+                            @endif
+                          @endif
                         @endforeach
                       </tbody>
                     </table>

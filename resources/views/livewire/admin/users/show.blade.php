@@ -67,6 +67,10 @@
                                             <td>{{ $user->mobile }}</td>
                                         </tr>
                                         <tr>
+                                            <td class="font-weight-bold">{{ __("Country") }}:&nbsp;</td>
+                                            <td>{{ $user->country }}</td>
+                                        </tr>
+                                        <tr>
                                             <td class="font-weight-bold">{{ __("Position in the Hotel") }}:&nbsp;</td>
                                             <td>{{ $position->name }}</td>
                                         </tr>

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('mobile')->nullable();
+            $table->string('country');
             $table->string('avatar')->nullable();
             $table->foreign("position_id")->references("id")->on("positions")->default(1);
             $table->string('hostname')->nullable()->unique();
