@@ -40,7 +40,7 @@
                       </thead>
                       <tbody>
                         @foreach($users as $value)
-                          @if (Auth::user()->name == 'Super' || Auth::user()->name == 'Admin' )
+                          @if (Auth::user()->all_view == 'yes')
                             <tr>
                               <td class="text-center">{{ $value->id }}</td>
                               <td class="text-center">{{ $value->name }} {{ $value->surname }}</td>
