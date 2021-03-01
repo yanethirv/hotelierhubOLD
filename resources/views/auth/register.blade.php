@@ -404,6 +404,18 @@
                                                             </fieldset>
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                                        <div class="col-12">
+                                                            {!! app('captcha')->display() !!}
+                                                            @if ($errors->has('g-recaptcha-response'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <a href="{{ route('login') }}" class="btn btn-outline-primary float-left btn-inline mb-50">{{ __('Login') }}</a>
                                                     <button type="submit" class="btn btn-primary float-right btn-inline mb-50">{{ __('Register') }}</a>
                                                 </form>

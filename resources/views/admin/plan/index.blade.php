@@ -51,11 +51,9 @@
                 <!-- Tabla de Suscripción Actual -->
                 @include('admin.plan.current-plan')
             @endrole
-
             <section id="content-types">
                 <div class="row match-height">
                     <div class="col-xl-12  col-md-12 col-sm-12">
-                        {{ $hotel->range_rooms }}
                         <section id="basic-examples">
                             <div class="row match-height">
                                 @forelse($plans as $plan)

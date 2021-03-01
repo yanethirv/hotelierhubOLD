@@ -8,6 +8,7 @@ use App\Activation;
 use App\Classes\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -63,7 +64,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
+            'name' => ['required','max:100', Rule::unique('products')],
             'modality' => 'required|string',
             'price' => 'required|numeric',
             'cost' => 'required|numeric',
@@ -136,7 +137,7 @@ class ProductController extends Controller
         $content = __("Updated Product");
 
         $request->validate([
-            'name' => 'required|string',
+            'name' => ['required','max:100', Rule::unique('products')->ignore($id)],
             'modality' => 'required|string',
             'price' => 'required|numeric',
             'cost' => 'required|numeric',

@@ -82,7 +82,6 @@
                                                                         <input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}">
                                                                         <input type="hidden" name="status" class="form-control" value="review">
                                                                     </div>
-        
                                                                 </form>
                                                             </div>
                                                         </div>

@@ -38,17 +38,17 @@
                     <div class="bg-white rounded-lg shadow-sm p-5">
                         <h3 class="mb-4 text-center">{{ __("Edit Service") }}</h3>
                         <form action="{{ route('service.update',$product->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                            @csrf
                             @method('PUT')
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $product->name }}">
+                                @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label for="range_rooms">{{ __("Modality") }}</label>
                                 <div class="input-group">
                                     <select id="modality" name="modality" class="form-control">
-                                        <option {{ ($product->modality) == '' ? 'selected' : '' }}  value="0">Choose</option>
                                         <option {{ ($product->modality) == 'activation' ? 'selected' : '' }}  value="activation">Activation</option>
                                         <option {{ ($product->modality) == 'payment' ? 'selected' : '' }}  value="payment">Payment</option>
                                       </select>
@@ -58,11 +58,13 @@
                             <div class="form-group">
                                 <label class="form-label">{{ __("Price") }}</label>
                                 <input type="number" name="price" class="form-control" placeholder="price" value="{{ $product->price }}">
+                                @error('price') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
      
                             <div class="form-group">
                                 <label class="form-label">{{ __("Cost") }}</label>
                                 <input type="number" name="cost" class="form-control" placeholder="cost" value="{{ $product->cost }}">
+                                @error('cost') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
     
                             <div class="form-group">
@@ -78,6 +80,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('type_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label for="status">{{ __("Status") }}</label>
@@ -101,9 +104,8 @@
                             <div class="form-group">
                                 <label class="form-label">{{ __("Description") }}</label>
                                 <textarea class="form-control" style="height:150px" name="description" placeholder="description">{{ $product->description }}</textarea>
+                                @error('description') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
-
-                            
                             <div class="form-group">
                                 <label class="form-label">{{ __("Document") }}</label><br>
                                 @if(is_null($product->document))
@@ -134,7 +136,6 @@
                                 @error('document') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
-                            
                             <a href="{{ route('services') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
                             <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
                         </form>

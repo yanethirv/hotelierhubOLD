@@ -38,7 +38,7 @@
                     <div class="bg-white rounded-lg shadow-sm p-5">
                         <h3 class="mb-4 text-center">{{ __("Create Product") }}</h3>
                         <form action="{{ route('service.store') }}" method="POST">
-                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="Name">

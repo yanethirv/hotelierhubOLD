@@ -36,20 +36,20 @@
             <div class="row">
                 <div class="col-lg-7 mx-auto">
                     <div class="bg-white rounded-lg shadow-sm p-5">
-                        <h3 class="mb-4 text-center">{{ __("Create Product") }}</h3>
+                        <h3 class="mb-4 text-center">{{ __("Create Services") }}</h3>
                         <form action="{{ route('service.store') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="form-label">{{ __("Name") }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="Name" value="{{
                                     old('name') ? old('name') : ""
                                 }}">
+                                @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Modality") }}</label>
                                 <div class="input-group">
                                     <select class="form-control" name="modality">
-                                        <option>Choose</option>
                                         <option value="activation">Activation</option>
                                         <option value="payment">Payment</option>
                                     </select>
@@ -61,12 +61,14 @@
                                 <input type="number" name="price" class="form-control" placeholder="price" value="{{
                                     old('price') ? old('price') : ""
                                 }}">
+                                @error('price') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Cost") }}</label>
                                 <input type="number" name="cost" class="form-control" placeholder="cost" value="{{
                                     old('cost') ? old('cost') : ""
                                 }}">
+                                @error('cost') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">{{ __("Type") }}</label>
@@ -75,6 +77,7 @@
                                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('type_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">{{ __("Status") }}</label>

@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'country' => ['required', 'string'],
             'hostname' => ['required', 'string', 'max:20', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            //'g-recaptcha-response' => ['required','captcha'],
+            'g-recaptcha-response' => ['required','captcha'],
         ]);
     }
 

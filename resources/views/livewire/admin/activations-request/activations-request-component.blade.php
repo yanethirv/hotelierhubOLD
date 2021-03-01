@@ -29,6 +29,7 @@
                     <th class="text-center">{{ __("Service") }}</th>
                     <th class="text-center">{{ __("Hostname") }}</th>
                     <th class="text-center">{{ __("Status") }}</th>
+                    <th class="text-center">{{ __("Comment") }}</th>
                     <th class="text-center">{{ __("Actions") }}</th>
                   </tr>
                 </thead>
@@ -50,68 +51,9 @@
                         @if ($activationService->status === 'inactive')
                           <td class="text-center"><i class="fa fa-circle font-small-3 text-danger mr-50"></i> {{ __("Inactive") }}</td>
                         @endif
+                      <td class="text-center">{{ $activationService->comment }}</td>
                       <td class="text-center">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
-                          {{ __("Edit status") }}
-                        </button>
-                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">{{ __("Edit status request") }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body text-left">
-                                      <form action="{{ route('activation.update',$activationService->id) }}" method="POST">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="PUT">
-                                        <div class="form-group">
-                                          <label for="description">{{ __("Status") }}</label>
-                                          <div class="input-group">
-                                              <select class="form-control" name="status">
-                                                  <option value="active"
-                                                  @if ($activationService->status === 'active')
-                                                      selected
-                                                  @endif
-                                                  >{{ __("Active") }}</option>
-          
-                                                  <option value="inactive"
-                                                  @if ($activationService->status === 'inactive')
-                                                      selected
-                                                  @endif
-                                                  >{{ __("Inactive") }}</option>
-
-                                                  <option value="process"
-                                                  @if ($activationService->status === 'process')
-                                                      selected
-                                                  @endif
-                                                  >{{ __("In Process") }}</option>
-
-                                                  <option value="wait"
-                                                  @if ($activationService->status === 'wait')
-                                                      selected
-                                                  @endif
-                                                  >{{ __("On Wait") }}</option>
-                                              </select>
-                                          </div>
-                                          @error('status') <span class="text-danger">{{ $message }}</span>@enderror
-                                      </div>
-                                        <div class="form-group">
-                                            <label class="form-label">{{ __("Comment") }}</label>
-                                            <textarea class="form-control" style="height:150px" name="comment" placeholder="comment"></textarea>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="{{ route('activations-request') }}" class="btn btn-outline-primary">{{ __("Back") }}</a>
-                                        <button class="btn btn-primary float-right" type="submit">{{ __("Save") }}</button>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="{{ route('activation.edit',$activationService->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Status") }}"><i class="feather icon-edit"></i></a>
                       </td>
                     </tr>
                   @endforeach

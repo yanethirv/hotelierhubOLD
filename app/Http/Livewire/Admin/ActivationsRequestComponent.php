@@ -63,11 +63,6 @@ class ActivationsRequestComponent extends Component
   //Para limpiar propiedades
   public function resetInput()
   {
-    $this->name = '';
-    $this->description = '';
-    $this->price = '';
-    $this->cost = '';
-    $this->type = '';
     $this->selected_id = null;
     $this->action = 1;
     $this->searchTerm = '';
@@ -76,12 +71,7 @@ class ActivationsRequestComponent extends Component
   //Para mosntra información del registro
   public function edit($id)
   {
-    $record = Product::findOrFail($id);
-    $this->name = $record->name;
-    $this->description = $record->description;
-    $this->price = $record->price;
-    $this->cost = $record->cost;
-    $this->type = $record->type;
+    $record = Activation::findOrFail($id);
     $this->selected_id = $record->id;
     $this->action = 2;
   }

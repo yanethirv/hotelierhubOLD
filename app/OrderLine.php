@@ -1,5 +1,8 @@
 <?php
 
+use App\Product;
+use App\Order;
+use App\ProductRequest;
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;

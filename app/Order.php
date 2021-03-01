@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\OrderLine;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
