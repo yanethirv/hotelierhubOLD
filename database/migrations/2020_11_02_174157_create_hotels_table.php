@@ -16,7 +16,7 @@ class CreateHotelsTable extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->string("name", 100)->unique();
             $table->string("range_rooms", 10)->default('0');
             $table->text("description");
@@ -38,6 +38,7 @@ class CreateHotelsTable extends Migration
             $table->string("state", 200);
             $table->string("city", 200);
             $table->string("address", 200);
+            $table->softDeletes(); //Columna para soft delete
             $table->timestamps();
         });
     }

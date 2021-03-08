@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('all_view')->default('no');
             $table->rememberToken();
+            $table->softDeletes(); //Columna para soft delete
             $table->timestamps();
         });
     }

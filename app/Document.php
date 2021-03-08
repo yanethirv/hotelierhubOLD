@@ -2,11 +2,10 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
 
-class Hotel extends Model
+class Document extends Model
 {
     use SoftDeletes;
  
@@ -14,8 +13,4 @@ class Hotel extends Model
 
     protected $guarded = ["id"];
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
 }
-

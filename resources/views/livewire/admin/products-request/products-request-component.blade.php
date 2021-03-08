@@ -55,9 +55,8 @@
                           <td class="text-center"><i class="fa fa-circle font-small-3 text-danger mr-50"></i> {{ __("Inactive") }}</td>
                         @endif
                       <td class="text-center">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
-                          {{ __("Edit status") }}
-                        </button>
+                        <a href="{{ route('product-request.edit',$orderLine->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Status") }}"><i class="feather icon-edit"></i></a>
+
                           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">

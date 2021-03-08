@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\User;
+use App\Hotel;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
 use DB;
@@ -43,8 +44,9 @@ class UsersComponent extends Component
     public function destroy($id)
     {
         if($id){
+            Hotel::where('user_id',$id)->delete();
             User::where('id',$id)->delete();
-            session()->flash('message', __("Registration successfully removed."));
+            session()->flash('message', __("User successfully removed."));
         }
     }
 

@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::resource('hotel-profile','HotelController');
     Route::get("/hotel-profile.downloadProfile/{hotel}", "HotelController@downloadProfile")->name("hotel-profile.downloadProfile");
     Route::resource('update-password','Users\SettingsController');
+
     //Mi Tarjeta
     Route::get("credit-card", 'BillingController@creditCardForm')->name("billing.credit_card_form");
     Route::post("credit-card", 'BillingController@processCreditCardForm')->name("billing.process_credit_card");
@@ -77,6 +78,12 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::view('suscriptions', 'admin.suscriptions')->name("suscriptions");
     Route::view('subscriptions-request', 'admin.subscriptions-request')->name("subscriptions-request");
     Route::resource('service', 'ProductController');
+    
+    Route::view('documents-resources', 'admin.documents-resources')->name("documents-resources");
+    Route::resource('document-resource', 'DocumentController');
+
+    Route::view('docs', 'admin.docs')->name("docs");
+
     Route::resource('activation', 'ActivationController');
     Route::resource('product-request', 'ProductRequestController');
     Route::resource('plan', 'PlanController');
@@ -86,6 +93,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('message-document-download/{id}', 'MessageController@downloadDocument')->name('message-document-download');
 
     Route::view('types', 'admin.types');
+    //Route::view('documents-resources', 'admin.documents');
 
     //Charts
     Route::get("charts", "ChartController@index")->name("charts");
