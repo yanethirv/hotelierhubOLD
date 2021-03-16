@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/forms/select/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/pickers/pickadate/pickadate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/file-uploaders/dropzone.min.css') }}">
     <!-- END: Vendor CSS-->
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Theme CSS-->
@@ -38,6 +39,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <!-- END: Custom CSS-->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/file-uploaders/dropzone.css') }}">
     {!! NoCaptcha::renderJs() !!}
     @yield('extra-css')
     @livewireStyles
@@ -87,8 +90,12 @@
     <!-- END: Page JS-->
 
      <!-- BEGIN: Page JS-->
-     <script src="../../../app-assets/js/scripts/pages/account-setting.js"></script>
+     <script src="{{ asset('js/scripts/pages/account-setting.js') }}"></script>
      <!-- END: Page JS-->
+
+     <script src="{{ asset('js/scripts/extensions/dropzone.min.js') }}"></script>
+
+     <script src="{{ asset('js/scripts/extensions/dropzone.js') }}"></script>
 
     @include('common.messages-toastr')
     

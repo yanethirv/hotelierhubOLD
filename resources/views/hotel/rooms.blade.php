@@ -1,7 +1,7 @@
 @extends('layouts.vuexy')
 
 @section('title')
-{{ __("Types") }}
+{{ __("My Hotel - Rooms") }}
 @endsection
 
 @section('extra-css')
@@ -22,9 +22,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __("Dashboard") }}</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="">{{ __("Types") }}</a>
+                                    <li class="breadcrumb-item">{{ __("My Hotel") }}
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __("List Types") }}
+                                    <li class="breadcrumb-item active">{{ __("List Rooms") }}
                                     </li>
                                 </ol>
                             </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            @livewire('admin.typess-component')
+            @livewire('hotel.rooms-component') <!-- 2 - Apunta a HTTP/CONTROLLERS/LIVEWIRE/HOTEL -->
         </div>
     </div>
     <!-- END: Content-->

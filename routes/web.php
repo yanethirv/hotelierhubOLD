@@ -22,6 +22,11 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::resource('change-password','Users\PasswordController');
     Route::resource('profile','Users\ProfileController');
     Route::resource('hotel-profile','HotelController');
+
+    /* HOTEL */
+    Route::resource('hotel-general','HotelGeneralController');
+
+    
     Route::get("/hotel-profile.downloadProfile/{hotel}", "HotelController@downloadProfile")->name("hotel-profile.downloadProfile");
     Route::resource('update-password','Users\SettingsController');
 
@@ -84,6 +89,39 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     Route::view('docs', 'admin.docs')->name("docs");
 
+    // Hotel - Rooms
+    Route::view('rooms', 'hotel.rooms')->name("rooms");       // 1 - Apunta a la carpeta views/hotel
+    Route::resource('room', 'RoomController');
+
+    // Hotel - Restaurants
+    Route::view('restaurants', 'hotel.restaurants')->name("restaurants");       // 1 - Apunta a la carpeta views/hotel
+    Route::resource('restaurant', 'RestaurantController');
+
+    // Hotel - Meal Plans
+    Route::view('meal-plans', 'hotel.meal-plans')->name("meal-plans");       // 1 - Apunta a la carpeta views/hotel
+    Route::resource('meal-plan', 'MealplanController');
+
+     // Hotel - Policies
+     Route::view('policies', 'hotel.policies')->name("policies");       // 1 - Apunta a la carpeta views/hotel
+     Route::resource('policy', 'PolicyController');
+
+    // Hotel - Rates
+    Route::view('rate-plans', 'hotel.rate-plans')->name("rate-plans");       // 1 - Apunta a la carpeta views/hotel
+    Route::resource('rate-plan', 'RateplanController');
+
+   // Hotel - Images
+   Route::view('hotel-photos', 'hotel.photo')->name("hotel-photos");       // 1 - Apunta a la carpeta views/hotel
+   Route::resource('photo', 'PhotoController');
+
+    // Hotel - Rate plans - Rooms
+    Route::view('rateplans-rooms', 'hotel.rateplans-rooms')->name("rateplans-rooms");       // 1 - Apunta a la carpeta views/hotel
+    Route::resource('rateplan-room', 'RateplanroomController');
+
+    // Hotel - Documents
+    Route::view('documents-hotel', 'hotel.documents')->name("documents-hotel");
+    Route::resource('documenthotel', 'DocumenthotelController');
+
+
     Route::resource('activation', 'ActivationController');
     Route::resource('product-request', 'ProductRequestController');
     Route::resource('plan', 'PlanController');
@@ -93,7 +131,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('message-document-download/{id}', 'MessageController@downloadDocument')->name('message-document-download');
 
     Route::view('types', 'admin.types');
-    //Route::view('documents-resources', 'admin.documents');
 
     //Charts
     Route::get("charts", "ChartController@index")->name("charts");

@@ -8,13 +8,12 @@
             <div class="dropdown sort-dropdown mb-1 mb-sm-0">
               @include('common.search')
             </div>
-
             <div class="ag-btns d-flex flex-wrap">
               <div class="action-btns">
                   <div class="btn-dropdown ">
                       <div class="btn-group dropdown actions-dropodown">
-                        <a href="{{route('document-resource.create')}}" type="button" class="btn btn-primary mr-1 mb-1">
-                          <i class="feather icon-plus"></i>{{ __("Create Resource") }}</a>
+                        <a href="{{route('policy.create')}}" type="button" class="btn btn-primary mr-1 mb-1">
+                          <i class="feather icon-plus"></i>{{ __("Create Policy") }}</a>
                       </div>
                   </div>
               </div>
@@ -26,27 +25,29 @@
               <table class="table table-hover mb-0">
                 <thead>
                   <tr>
-                    <th class="text-center">{{ __("Name") }}</th>
+                    <th class="text-center">{{ __("ID") }}</th>
+                    <th class="text-center">{{ __("Policy") }}</th>
+                    <th class="text-center">{{ __("Type") }}</th>
                     <th class="text-center">{{ __("Status") }}</th>
-                    <th class="text-center">{{ __("Document") }}</th>
                     <th class="text-center">{{ __("Actions") }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($documents as $document)
+                  @foreach ($policies as $policy)
                     <tr>
-                      <td class="text-center">{{ $document->name }}</td>
-                      <td class="text-center">{{ $document->status }}</td>
-                      <td class="text-center"><a class="btn btn-success" href="{{ asset($document->document) }}" target="_blank" rel="noopener noreferrer">{{ __("View Document") }}</a></td>
+                      <td class="text-center">{{ $policy->id }}</td>
+                      <td class="text-center">{{ $policy->description }}</td>
+                      <td class="text-center">{{ $policy->type }}</td>
+                      <td class="text-center">{{ $policy->status }}</td>
                       <td class="text-center">
-                        <a href="{{ route('document-resource.edit',$document->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Resource") }}"><i class="feather icon-edit"></i></a>
-                        <a href="javascript:void(0);" onclick="myFunction('{{ $document->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete Resource") }}"><i class="feather icon-trash"></i></a>
+                        <a href="{{ route('policy.edit',$policy->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Policy") }}"><i class="feather icon-edit"></i></a>
+                        <a href="javascript:void(0);" onclick="myFunction('{{ $policy->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete Policy") }}"><i class="feather icon-trash"></i></a>
                       </td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
-              {{ $documents->links() }}
+              {{ $policies->links() }}
             </div>
           </div>
         </div>
@@ -55,7 +56,7 @@
   </div>
   </div>
   @elseif($action == 2)
-  @include('livewire.admin.documents.documents-form')
+
   @endif
   <script type="text/javascript">
   function myFunction(id)
@@ -63,7 +64,7 @@
     let me = this;
     Swal.fire({
       title: 'Confirm',
-      text: 'You want to delete the resource?',
+      text: 'You want to delete the policy?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

@@ -89,11 +89,6 @@
                             <a class="dropdown-item" href="{{ route('profile.index') }}""><i class="feather icon-user"></i> {{ __("Edit Profile") }}</a>
                             <div class="dropdown-divider"></div>
 
-                            @role('user|hotelier')
-                            <a class="dropdown-item" href="{{ route('hotel-profile.index') }}""><i class="fa fa-building-o"></i> {{ __("Edit Hotel Profile") }}</a>
-                            <div class="dropdown-divider"></div>
-                            @endrole
-
                             <a class="dropdown-item" href="{{ route('update-password.edit',[Auth::user()->id]) }}"><i class="feather icon-lock"></i> {{ __("Change Password") }}</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Hotel;
 use App\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class HotelController extends Controller
+class HotelGeneralController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,10 +24,13 @@ class HotelController extends Controller
     {
         $hotel = Hotel::where('user_id', '=', Auth::user()->id)->first();
 
+        $experienceslist = DB::table('experiences')->pluck("name","id");
+
         //dd($hotel);
 
-        return view('users.profile.hotel-profile',compact('hotel'));
+        return view('hotel.general',compact('hotel','experienceslist'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,23 +55,21 @@ class HotelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $hotel = Hotel::where('user_id', '=', $id)->first();
-
-        return view('livewire.admin.users.show-hotel-profile',compact('hotel'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hotel $hotel)
+    public function edit($id)
     {
         //
     }
@@ -75,10 +78,9 @@ class HotelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hotel  $hotel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id)
     {
         $status = 'success';
@@ -92,27 +94,17 @@ class HotelController extends Controller
 
         $hotel->update($input);
 
-        return redirect('hotel-profile/'.$hotel->user_id)->with('process_result',['status' => $status, 'content' => $content]);
+        return redirect('hotel-general')->with('process_result',['status' => $status, 'content' => $content]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy($id)
     {
         //
-    }
-
-    public function downloadProfile(string $hotel)
-    {
-        $hotel = Hotel::findOrFail($hotel);
-
-        //dd($hotelProfile);
-
-        $pdf = \PDF::loadView('admin.hotel.profile', ['hotel' => $hotel]);
-        return $pdf->download('hotel-profile.pdf');
     }
 }

@@ -9,7 +9,7 @@
 
 Dropzone.options.dpzSingleFile = {
   paramName: "file", // The name that will be used to transfer the file
-  maxFiles: 1,
+  maxFiles: 2,
   init: function () {
     this.on("maxfilesexceeded", function (file) {
       this.removeAllFiles();
@@ -23,7 +23,7 @@ Dropzone.options.dpzSingleFile = {
 ********************************************/
 Dropzone.options.dpzMultipleFiles = {
   paramName: "file", // The name that will be used to transfer the file
-  maxFilesize: 0.5, // MB
+  maxFilesize: 5, // MB
   clickable: true
 }
 

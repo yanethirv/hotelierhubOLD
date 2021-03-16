@@ -159,6 +159,16 @@
                                                                 @error('property_type') <span class="text-danger">{{ $message }}</span>@enderror
                                                             </div>
                                                         </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label><strong>Experience :</strong></label><br>
+                                                                <label><input type="checkbox" name="experience[]" value="Laravel"> Laravel</label>
+                                                                <label><input type="checkbox" name="experience[]" value="JQuery"> JQuery</label>
+                                                                <label><input type="checkbox" name="experience[]" value="Bootstrap"> Bootstrap</label>
+                                                                <label><input type="checkbox" name="experience[]" value="Codeigniter"> Codeigniter</label>
+                                                                <label><input type="checkbox" name="experience[]" value="JQuery UI"> JQuery UI</label>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                             <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">{{ __("Save
                                                                 changes") }}</button>

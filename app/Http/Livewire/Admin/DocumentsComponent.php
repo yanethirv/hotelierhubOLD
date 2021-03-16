@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Document;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Document;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 
 class DocumentsComponent extends Component
 {
@@ -99,14 +100,17 @@ class DocumentsComponent extends Component
     $this->resetInput();
   }
 
+
   //Eliminar registros
   public function destroy($id)
   {
     if($id) {
       $record = Document::find($id);
+      $filename = public_path($record->document);
+      File::delete($filename);
       $record->delete();
       $this->resetInput();
-      session()->flash('message',  __("Resource successfully removed."));
+      session()->flash('message', __("Resource successfully removed."));
     }
   }
 

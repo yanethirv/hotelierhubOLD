@@ -68,6 +68,16 @@
 
                 @role('super-admin|user|hotelier')
                     <li class="navigation-header"><span>{{ __("My Hotel") }}</span></li>
+
+                    <li {{Route::is('hotel-general.index')? 'class=active':''}} class="nav-item"><a href="{{ route('hotel-general.index') }}"><i class="fa fa-building"></i><span class="menu-title">{{ __("General") }}</span></a></li>
+                    <li class="{{ (request()->is('rooms')) ? 'active' : '' }}"><a href="{{route('rooms')}}"><i class="fa fa-bed"></i><span class="menu-title">{{ __("Rooms") }}</span></a></li>
+                    <li class="{{ (request()->is('restaurants')) ? 'active' : '' }}"><a href="{{route('restaurants')}}"><i class="fa fa-coffee"></i><span class="menu-title">{{ __("Food & Beverage") }}</span></a></li>
+                    <li class="{{ (request()->is('meal-plans')) ? 'active' : '' }}"><a href="{{route('meal-plans')}}"><i class="fa fa-cutlery"></i><span class="menu-title">{{ __("Meal Plans") }}</span></a></li>
+                    <li class="{{ (request()->is('policies')) ? 'active' : '' }}"><a href="{{route('policies')}}"><i class="fa fa-gavel"></i><span class="menu-title">{{ __("Policies") }}</span></a></li>
+                    <li class="{{ (request()->is('rate-plans')) ? 'active' : '' }}"><a href="{{route('rate-plans')}}"><i class="fa fa-usd"></i><span class="menu-title">{{ __("Rate Plans") }}</span></a></li>
+                    <li class="{{ (request()->is('hotel-photos')) ? 'active' : '' }}"><a href="{{route('hotel-photos')}}"><i class="fa fa-camera-retro"></i><span class="menu-title">{{ __("Photos") }}</span></a></li> 
+                    <li class="{{ (request()->is('rateplans-rooms')) ? 'active' : '' }}"><a href="{{route('rateplans-rooms')}}"><i class="fa fa-th-list"></i><span class="menu-title">{{ __("Rates") }}</span></a></li>     
+                    <li class="{{ (request()->is('documents-hotel')) ? 'active' : '' }}"><a href="{{route('documents-hotel')}}"><i class="fa fa-file"></i><span class="menu-title">{{ __("Documents") }}</span></a></li>     
                 @endrole
 
                 @role('super-admin|user|hotelier')
