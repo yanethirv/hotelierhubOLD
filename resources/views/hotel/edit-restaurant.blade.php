@@ -65,11 +65,21 @@
                                 <input type="text" name="closing_time" class="form-control" placeholder="" value="{{ $restaurant->closing_time }}">
                                 @error('closing_time') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
-                           
+
                             <div class="form-group">
                                 <label class="form-label">{{ __("Restaurant theme") }}</label>
-                                <input type="text" name="theme" class="form-control" placeholder="" value="{{ $restaurant->theme }}">
-                                @error('theme') <span class="text-danger">{{ $message }}</span>@enderror
+                                <select name="theme_id" class="form-control">
+                                     @foreach ($themes as $theme)
+                                        <option value="{{ $theme->id }}"
+                                            @if ($theme->id ===  $restaurant->theme_id)
+                                                selected
+                                            @endif
+                                        >
+                                            {{ $theme->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('theme_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">

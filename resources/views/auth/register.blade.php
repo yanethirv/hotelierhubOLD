@@ -363,7 +363,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-2">
-                                                        <input id="hostname" type="text" class="form-control @error('hostname') is-invalid @enderror" name="hostname" value="{{ old('hostname') }}" placeholder="{{ __('Hostname') }}" required autocomplete="hostname" autofocus>
+                                                        <input id="hostname" type="text" class="form-control @error('hostname') is-invalid @enderror" name="hostname" value="{{ old('hostname') }}" placeholder="{{ __('Property Name') }}" required autocomplete="hostname" autofocus>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text" id="basic-addon2">.hotelierhub.net</span>
                                                         </div>

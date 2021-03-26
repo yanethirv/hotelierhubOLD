@@ -27,8 +27,8 @@
                   <tr>
                     <th class="text-center">{{ __("Code") }}</th>
                     <th class="text-center">{{ __("Type") }}</th>
-                    <th class="text-center">{{ __("Number Rooms") }}</th>
-                    <th class="text-center">{{ __("Ocupancy") }}</th>
+                    <th class="text-center">{{ __("Number of Rooms") }}</th>
+                    <th class="text-center">{{ __("Occupancy per Room") }}</th>
                     <th class="text-center">{{ __("Actions") }}</th>
                   </tr>
                 </thead>
@@ -38,7 +38,7 @@
                       <td class="text-center">{{ $room->code }}</td>
                       <td class="text-center">{{ $room->typeroom->name }}</td>
                       <td class="text-center">{{ $room->number_rooms }}</td>
-                      <td class="text-center">{{ $room->ocupancy }}</td>
+                      <td class="text-center">{{ $room->occupancy->name }}</td>
                       <td class="text-center">
                         <a href="{{ route('room.edit',$room->id) }}" class="btn btn-icon btn-warning mt-1" title="{{ __("Edit Room") }}"><i class="feather icon-edit"></i></a>
                         <a href="javascript:void(0);" onclick="myFunction('{{ $room->id }}')" class="btn btn-icon btn-danger mt-1" title="{{ __("Delete Room") }}"><i class="feather icon-trash"></i></a>

@@ -70,11 +70,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">{{ __("Ocupancy per room") }}</label>
-                                <input type="text" name="ocupancy" class="form-control" placeholder="" value="{{
-                                    old('ocupancy') ? old('ocupancy') : ""
-                                }}" required>
-                                @error('ocupancy') <span class="text-danger">{{ $message }}</span>@enderror
+                                <label for="type_room">{{ __("Occupancy per room") }}</label>
+                                <select class="custom-select form-control" id="typeroom_id" name="occupancy_id">
+                                    @foreach ($occupancies as $occupancy)
+                                        <option value="{{ $occupancy->id }}">
+                                        {{ $occupancy->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('occupancy_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">

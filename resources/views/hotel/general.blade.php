@@ -138,7 +138,7 @@
                                                                     @endforeach
                                                                 </label><br><br>
                                                                 @foreach ($experienceslist as $cat => $valor)
-                                                                    <label><input type="checkbox" name="experience[]" value="{{ $valor }}"> {{ $valor }}</label>
+                                                                    <label><input type="checkbox" name="experience[]" value="{{ $valor }}"> {{ $valor }}</label><br>
                                                                 @endforeach
                                                             </div>  
                                                         </div> 

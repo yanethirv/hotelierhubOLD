@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use App\Typeroom;
+use App\Occupancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -18,8 +19,9 @@ class RoomController extends Controller
     public function create()
     {
         $typerooms = Typeroom::all();
+        $occupancies = Occupancy::all();
 
-        return view('hotel.create-room', compact('typerooms'));
+        return view('hotel.create-room', compact('typerooms','occupancies'));
     }
 
     /**
@@ -34,7 +36,7 @@ class RoomController extends Controller
             'code' => 'required','max:30',
             'typeroom_id' => 'required',
             'number_rooms' => 'required',
-            'ocupancy' => 'required',
+            'occupancy_id' => 'required',
             'description' => 'required',
             'hotel_id' => 'required'
             //'extra_person' => 'required',
@@ -59,8 +61,9 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
 
         $typerooms = Typeroom::all();
+        $occupancies = Occupancy::all();
 
-        return view('hotel.edit-room', compact('room','typerooms'));
+        return view('hotel.edit-room', compact('room','typerooms','occupancies'));
     }
 
     public function update(Request $request, $id)
@@ -70,7 +73,7 @@ class RoomController extends Controller
             'code' => 'required','max:30',
             'typeroom_id' => 'required',
             'number_rooms' => 'required',
-            'ocupancy' => 'required',
+            'occupancy_id' => 'required',
             'description' => 'required',
             'hotel_id' => 'required'
             //'extra_person' => 'required',

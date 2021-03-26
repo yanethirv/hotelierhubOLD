@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Restaurant;
 use App\Typerestaurant;
+use App\Theme;
 use App\Locationrestaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,11 @@ class RestaurantController extends Controller
     public function create()
     {
         $typerestaurants = Typerestaurant::all();
+        $themes = Theme::all();
         $locationrestaurants = Locationrestaurant::all();
 
-        return view('hotel.create-restaurant', compact('typerestaurants','locationrestaurants'));
+
+        return view('hotel.create-restaurant', compact('typerestaurants','locationrestaurants','themes'));
     }
 
     /**
@@ -37,7 +40,7 @@ class RestaurantController extends Controller
             'pax' => 'required',
             'open_time' => 'required',
             'closing_time' => 'required',
-            'theme' => 'required',
+            'theme_id' => 'required',
             'typerestaurant_id' => 'required',
             'included' => 'required',
             'locationrestaurant_id' => 'required',
@@ -59,9 +62,10 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::findOrFail($id);
 
         $typerestaurants = Typerestaurant::all();
+        $themes = Theme::all();
         $locationrestaurants = Locationrestaurant::all();
 
-        return view('hotel.edit-restaurant', compact('restaurant','typerestaurants','locationrestaurants'));
+        return view('hotel.edit-restaurant', compact('restaurant','typerestaurants','locationrestaurants','themes'));
     }
 
     public function update(Request $request, $id)
@@ -72,7 +76,7 @@ class RestaurantController extends Controller
             'pax' => 'required',
             'open_time' => 'required',
             'closing_time' => 'required',
-            'theme' => 'required',
+            'theme_id' => 'required',
             'typerestaurant_id' => 'required',
             'included' => 'required',
             'locationrestaurant_id' => 'required',

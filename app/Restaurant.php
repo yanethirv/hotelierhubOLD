@@ -4,6 +4,7 @@ namespace App;
 
 use App\Hotel;
 use App\Typerestaurant;
+use App\Theme;
 use App\Locationrestaurant;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,6 +24,10 @@ class Restaurant extends Model
 
     public function typerestaurant() {
         return $this->belongsTo(Typerestaurant::class);
+    }
+
+    public function theme() {
+        return $this->belongsTo(Theme::class);
     }
 
     public function locationrestaurant() {

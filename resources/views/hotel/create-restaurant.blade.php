@@ -74,11 +74,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">{{ __("Restaurant theme") }}</label>
-                                <input type="text" name="theme" class="form-control" placeholder="" value="{{
-                                    old('theme') ? old('theme') : ""
-                                }}" required>
-                                @error('theme') <span class="text-danger">{{ $message }}</span>@enderror
+                                <label for="type_room">{{ __("Restaurant theme") }}</label>
+                                <select class="custom-select form-control" id="theme_id" name="theme_id">
+                                    @foreach ($themes as $theme)
+                                        <option value="{{ $theme->id }}">
+                                        {{ $theme->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('theme_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">

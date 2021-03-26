@@ -69,11 +69,21 @@
                                 <input type="text" name="number_rooms" class="form-control" placeholder="" value="{{ $room->number_rooms }}">
                                 @error('number_rooms') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
-     
+
                             <div class="form-group">
-                                <label class="form-label">{{ __("Ocupancy per room") }}</label>
-                                <input type="text" name="ocupancy" class="form-control" placeholder="ocupancy" value="{{ $room->ocupancy }}">
-                                @error('ocupancy') <span class="text-danger">{{ $message }}</span>@enderror
+                                <label class="form-label">{{ __("Occupancy per room") }}</label>
+                                <select name="occupancy_id" class="form-control">
+                                     @foreach ($occupancies as $occupancy)
+                                        <option value="{{ $occupancy->id }}"
+                                            @if ($occupancy->id ===  $room->occupancy_id)
+                                                selected
+                                            @endif
+                                        >
+                                            {{ $occupancy->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('occupancy_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">
