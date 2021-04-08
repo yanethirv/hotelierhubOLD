@@ -88,9 +88,13 @@ class HotelGeneralController extends Controller
 
         $hotel =  Hotel::findOrFail($id);
 
-
-        $input = $request->all();
-        $input['experience'] = $request->input('experience');
+        if ($file = $request->input('experience')) {
+            $input = $request->all();
+            $input['experience'] = $request->input('experience');
+        }else{
+            $input = $request->all();
+            $input['experience'] = $hotel->experience;
+        }
 
         $hotel->update($input);
 

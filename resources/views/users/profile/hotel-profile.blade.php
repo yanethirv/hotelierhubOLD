@@ -38,7 +38,7 @@
                             <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                                 <li class="nav-item">
                                     <a class="nav-link d-flex py-75 active" id="account-pill-general" data-toggle="pill" href="#account-vertical-general" aria-expanded="true">
-                                        <i class="feather icon-globe mr-50 font-medium-3"></i>
+                                        <i class="fa fa-building mr-50 font-medium-3"></i>
                                         {{ __("General") }}
                                     </a>
                                 </li>
@@ -144,6 +144,7 @@
                                                                         <option {{ ($hotel->property_type) == 'Boutique' ? 'selected' : '' }}  value="Boutique">Boutique</option>
                                                                         <option {{ ($hotel->property_type) == 'Bungalows' ? 'selected' : '' }}  value="Bungalows">Bungalows</option>
                                                                         <option {{ ($hotel->property_type) == 'Condo Hotel' ? 'selected' : '' }}  value="Condo Hotel">Condo Hotel</option>
+                                                                        <option {{ ($hotel->property_type) == 'Cottage' ? 'selected' : '' }}  value="Cottage">Cottage</option>
                                                                         <option {{ ($hotel->property_type) == 'Glamping' ? 'selected' : '' }}  value="Glamping">Glamping</option>
                                                                         <option {{ ($hotel->property_type) == 'Guesthouse' ? 'selected' : '' }}  value="Guesthouse">Guesthouse</option>
                                                                         <option {{ ($hotel->property_type) == 'Hostal' ? 'selected' : '' }}  value="Hostal">Hostal</option>
